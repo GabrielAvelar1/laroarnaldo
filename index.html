@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LARO | Liga Acadêmica de Reabilitação Oral</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="preloader">
+        <i class="fa-solid fa-tooth pulse-tooth"></i>
+        <div class="loading-text">L.A.R.O.</div>
+    </div>
+
+    <div class="transition-overlay"></div>
+
+    <header class="navbar">
+        <div class="logo">L.A.R.O<span>.</span></div>
+        <nav>
+            <a href="#" class="nav-link active" data-page="inicio">Início</a>
+            <a href="#" class="nav-link" data-page="restauracao">Dentística</a>
+            <a href="#" class="nav-link" data-page="protese">Prótese</a>
+            <a href="#" class="nav-link" data-page="casos">Casos</a>
+            <a href="#" class="nav-link nav-cta" data-page="seletivo">Junte-se à Liga</a>
+        </nav>
+    </header>
+
+    <main id="content-wrapper">
+        
+        <section id="inicio" class="page active with-bg" style="--bg-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1920');">
+            <div class="hero-section hero-centered">
+                <div class="hero-text text-center">
+                    <h1 class="reveal">Reabilitando<br><span>Sorrisos</span></h1>
+                    <p class="reveal">Uma abordagem científica sobre a harmonia entre função e estética oral.</p>
+                </div>
+            </div>
+
+            <div class="container about-section">
+                <div class="grid-layout">
+                    <div class="reveal">
+                        <h2 class="title-reveal" style="font-size: 2.5rem;">A Nossa Essência</h2>
+                        <p class="subtitle" style="margin-bottom: 1.5rem;">Formando profissionais críticos e inovadores.</p>
+                        <p style="line-height: 1.8; opacity: 0.9;">A Liga Acadêmica de Reabilitação Oral tem como objetivo aprofundar os estudos em casos clínicos complexos, unindo a Dentística, Prótese e Oclusão. Acreditamos que a odontologia de excelência é uma arte embasada em evidências científicas sólidas e tecnologia.</p>
+                    </div>
+                    <div class="stats-grid reveal">
+                        <div class="stat-box">
+                            <i class="fa-solid fa-book-open"></i>
+                            <h3 class="accent-text">Ensino</h3>
+                            <p>Discussões de artigos científicos e aulas teóricas avançadas.</p>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fa-solid fa-microscope"></i>
+                            <h3 class="accent-text">Pesquisa</h3>
+                            <p>Produção de conhecimento e inovação tecnológica na área.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="restauracao" class="page with-bg" style="--bg-image: url('https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1920');">
+            <div class="container">
+                <h2 class="title-reveal">Restauração Avançada</h2>
+                <div class="grid-layout">
+                    <div class="info-block reveal-left">
+                        <h3 class="accent-text">Biomimetismo</h3>
+                        <p>A arte de devolver ao dente sua forma e função natural através de sistemas adesivos modernos. Foco na preservação da estrutura dental sadia remanescente.</p>
+                    </div>
+
+                    
+
+                    <div class="image-block reveal-right">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800" alt="Procedimento de Dentística">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="protese" class="page with-bg" style="--bg-image: url('https://images.unsplash.com/photo-1598256989800-fea5f6c8d0d3?q=80&w=1920');">
+            <div class="container">
+                <h2 class="title-reveal">Ciência Protética</h2>
+                <div class="cards-stack">
+                    <div class="glass-card stagger">
+                        <i class="fa-solid fa-laptop-medical"></i>
+                        <h4>Planejamento Digital</h4>
+                        <p>DSD (Digital Smile Design) e fluxo digital 3D para previsibilidade e precisão micrométrica nas reabilitações.</p>
+                    </div>
+                    <div class="glass-card stagger">
+                        <i class="fa-regular fa-gem"></i>
+                        <h4>Cerâmicas Puras</h4>
+                        <p>Utilização de sistemas Metal-Free como Zircônia e Dissilicato de Lítio, garantindo alta translucidez e naturalidade.</p>
+                    </div>
+                    <div class="glass-card stagger">
+                        <i class="fa-solid fa-tooth"></i>
+                        <h4>Implantodontia</h4>
+                        <p>Reabilitação implanto-suportada com foco na devolução da dimensão vertical de oclusão e função mastigatória.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="casos" class="page with-bg" style="--bg-image: url('https://images.unsplash.com/photo-1590623393963-366f44af5074?q=80&w=1920');">
+            <div class="container">
+                <h2 class="title-reveal">Resultados Clínicos</h2>
+                <p class="subtitle">Arraste para comparar a evolução do planejamento reabilitador.</p>
+                <div class="comparison-slider">
+                    <div class="img after"><span>DEPOIS</span></div>
+                    <div class="img before"><span>ANTES</span></div>
+                    <input type="range" min="0" max="100" value="50" class="slider-input">
+                    <div class="slider-line">
+                        <div class="slider-drag-btn"><i class="fa-solid fa-arrows-left-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="seletivo" class="page with-bg" style="--bg-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1920');">
+            <div class="container seletivo-container">
+                <div class="form-wrapper">
+                    <h2 class="title-reveal">Faça parte da LARO</h2>
+                    <p>Buscamos acadêmicos comprometidos com a excelência clínica e pesquisa científica em Odontologia.</p>
+                    
+                    <form id="apply-form">
+                        <div class="input-group">
+                            <input type="text" placeholder="Nome Completo" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" placeholder="E-mail Acadêmico" required>
+                        </div>
+                        <div class="input-group">
+                            <select required>
+                                <option value="" disabled selected>Período atual</option>
+                                <option value="4">4º Período</option>
+                                <option value="5">5º Período</option>
+                                <option value="6">6º Período</option>
+                                <option value="7">7º Período em diante</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <textarea placeholder="Por que você quer entrar para a Liga? (Sua motivação)" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Candidatura</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
