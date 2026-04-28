@@ -1,8 +1,8 @@
 :root {
    
     --bg: #0E2F76;       
-    --accent: #F9F295;   
-    --text: #AAC0E1;     
+    --accent: #AAC0E1;   
+    --text: #F9F295;     
     --glass: rgba(255, 255, 255, 0.05); /* Efeito vidro sutil */
     --border: rgba(255, 255, 255, 0.1); /* Borda elegante */
 }
