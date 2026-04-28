@@ -1,8 +1,8 @@
 :root {
-    /* Paleta Padrão Original (Premium) */
-    --bg: #0A192F;       /* Azul profundo clínico */
-    --accent: #D4AF37;   /* Dourado premium */
-    --text: #E6F1FF;     /* Texto claro */
+   
+    --bg: #AAC0E1;       
+    --accent: #0E2f76;   
+    --text: #D4AF37;     
     --glass: rgba(255, 255, 255, 0.05); /* Efeito vidro sutil */
     --border: rgba(255, 255, 255, 0.1); /* Borda elegante */
 }
