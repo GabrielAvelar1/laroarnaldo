@@ -2,12 +2,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById('preloader');
     
-    // Força o preloader a sumir após 1.5 segundos
     setTimeout(() => {
         preloader.style.opacity = '0';
         setTimeout(() => {
             preloader.style.display = 'none';
-        }, 800); // Tempo da transição CSS
+        }, 800);
     }, 1500); 
 });
 
@@ -26,31 +25,25 @@ links.forEach(link => {
         
         if (targetPageId === currentPage.id) return;
 
-        // Cortina Entrando (Desliza da esquerda para a direita)
         gsap.to(overlay, {
             left: 0,
             duration: 0.4,
             ease: "power3.inOut",
             onComplete: () => {
-                // Troca a página por trás da cortina
                 currentPage.classList.remove('active');
                 document.getElementById(targetPageId).classList.add('active');
                 
-                // Atualiza o menu
                 links.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
 
-                // Roda as animações da página
                 runPageAnimations(targetPageId);
 
-                // Cortina Saindo (Continua deslizando para a direita)
                 gsap.to(overlay, {
                     left: "100%",
                     duration: 0.4,
                     ease: "power3.inOut",
                     onStart: () => { window.scrollTo(0,0); },
                     onComplete: () => { 
-                        // Reseta a cortina lá na esquerda para o próximo clique
                         gsap.set(overlay, { left: "-100%" }); 
                     }
                 });
@@ -59,7 +52,7 @@ links.forEach(link => {
     });
 });
 
-// 6. Animações Internas (Fade-in com GSAP)
+// 4. Animações Internas (Fade-in com GSAP)
 function runPageAnimations(pageId) {
     const tl = gsap.timeline();
 
@@ -85,10 +78,9 @@ function runPageAnimations(pageId) {
     }
 }
 
-// Inicia animação inicial ao carregar
 runPageAnimations('inicio');
 
-// 7. Slider Antes/Depois (Página de Casos)
+// 5. Slider Antes/Depois (Página de Casos)
 const sliderInput = document.querySelector('.slider-input');
 const beforeImg = document.querySelector('.before');
 const sliderLine = document.querySelector('.slider-line');
@@ -101,3 +93,35 @@ if(sliderInput) {
     });
 }
 
+// 6. Menu Mobile (Hamburguer Interativo)
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+const navLinksMobile = document.querySelectorAll('.nav-link');
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('nav-active');
+        
+        // Alterna o ícone entre barras e "X"
+        const icon = hamburger.querySelector('i');
+        if(navMenu.classList.contains('nav-active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+        } else {
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    });
+}
+
+// Fecha o menu Mobile automaticamente quando clicar em algum link
+navLinksMobile.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('nav-active');
+        if(hamburger) {
+            const icon = hamburger.querySelector('i');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    });
+});

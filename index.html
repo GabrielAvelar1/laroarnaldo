@@ -11,15 +11,23 @@
 <body>
 
     <div id="preloader">
-        <i class="fa-solid fa-tooth pulse-tooth"></i>
+        <img src="logo.png" alt="Logo LARO" class="pulse-logo">
         <div class="loading-text">L.A.R.O.</div>
     </div>
 
     <div class="transition-overlay"></div>
 
     <header class="navbar">
-        <div class="logo">L.A.R.O<span>.</span></div>
-        <nav>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo L.A.R.O." class="nav-logo">
+            <div class="logo">L.A.R.O<span>.</span></div>
+        </div>
+        
+        <button class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav id="nav-menu">
             <a href="#" class="nav-link active" data-page="inicio">Início</a>
             <a href="#" class="nav-link" data-page="restauracao">Dentística</a>
             <a href="#" class="nav-link" data-page="protese">Prótese</a>
@@ -29,7 +37,6 @@
     </header>
 
     <main id="content-wrapper">
-        
         <section id="inicio" class="page active with-bg" style="--bg-image: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1920');">
             <div class="hero-section hero-centered">
                 <div class="hero-text text-center">
@@ -69,9 +76,6 @@
                         <h3 class="accent-text">Biomimetismo</h3>
                         <p>A arte de devolver ao dente sua forma e função natural através de sistemas adesivos modernos. Foco na preservação da estrutura dental sadia remanescente.</p>
                     </div>
-
-                    
-
                     <div class="image-block reveal-right">
                         <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800" alt="Procedimento de Dentística">
                     </div>
