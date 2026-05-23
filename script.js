@@ -29,16 +29,46 @@ if(window.innerWidth > 768) {
     });
 }
 
-// Slider Antes/Depois (Página de Casos)
+// Slider Antes/Depois (Página de Casos) Automático
 const sliderInput = document.querySelector('.slider-input');
 const beforeImg = document.querySelector('.before');
 const sliderLine = document.querySelector('.slider-line');
 
 if(sliderInput && beforeImg && sliderLine) {
-    sliderInput.addEventListener('input', (e) => {
-        let val = e.target.value;
+    let autoPlay = true;
+    let autoSlideVal = 50;
+    let autoDirection = 0.2; // Velocidade do arraste
+
+    const updateSlider = (val) => {
         beforeImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
         sliderLine.style.left = `${val}%`;
+        sliderInput.value = val;
+    };
+
+    // Animação automática
+    const animateSlider = () => {
+        if(!autoPlay) return;
+        
+        autoSlideVal += autoDirection;
+        if(autoSlideVal >= 80) autoDirection = -0.2; // Limites de movimento
+        if(autoSlideVal <= 20) autoDirection = 0.2;
+        
+        updateSlider(autoSlideVal);
+        requestAnimationFrame(animateSlider);
+    };
+    
+    // Inicia a animação
+    requestAnimationFrame(animateSlider);
+
+    // Parar animação quando o usuário interagir
+    const stopAutoPlay = () => { autoPlay = false; };
+    
+    sliderInput.addEventListener('mousedown', stopAutoPlay);
+    sliderInput.addEventListener('touchstart', stopAutoPlay);
+
+    // Atualização baseada na interação do usuário
+    sliderInput.addEventListener('input', (e) => {
+        updateSlider(e.target.value);
     });
 }
 
