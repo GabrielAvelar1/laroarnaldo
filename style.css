@@ -168,12 +168,189 @@ footer { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.6); f
 }
 
 @media (max-width: 768px) {
-    header { padding: 30px 20px; }
-    .nav-logo { height: 60px; }
-    .hero-text h1 { font-size: 3.5rem; }
-    .grid-layout { grid-template-columns: 1fr; gap: 2rem; }
-    .glass-card { padding: 2rem; }
-    .comparison-slider { height: 350px; }
-    .main-content { gap: 80px; padding-top: 140px; }
-    .title-reveal { font-size: 2.5rem !important; }
+    /* Header & Navegação Superior Otimizada */
+    header { 
+        padding: 16px 20px; 
+    }
+    .logo-container {
+        gap: 10px;
+    }
+    .nav-logo { 
+        height: 48px; 
+    }
+    .logo { 
+        font-size: 1.6rem; 
+        letter-spacing: 1px;
+    }
+    .nav-pill {
+        padding: 4px 8px;
+        gap: 4px;
+        border-radius: 30px;
+    }
+    .nav-cta {
+        font-size: 0.78rem !important;
+        padding: 6px 14px !important;
+        letter-spacing: 0.5px;
+    }
+    .hamburger {
+        padding: 6px 8px;
+        font-size: 1.1rem;
+    }
+
+    /* Layout Geral & Espaçamentos Entre Seções */
+    .container {
+        padding: 0 16px;
+    }
+    .main-content { 
+        gap: 60px; 
+        padding-top: 105px; 
+    }
+
+    /* Hero Section */
+    .hero-section {
+        min-height: auto;
+        padding: 30px 0;
+    }
+    .hero-text h1 { 
+        font-size: 2.8rem; 
+        line-height: 1.05;
+        margin-bottom: 1rem;
+    }
+    .hero-text p {
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+
+    /* Tipografia de Seções */
+    .title-reveal { 
+        font-size: 2.1rem !important; 
+        margin-bottom: 0.6rem;
+    }
+    .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Grids & Cards */
+    .grid-layout { 
+        grid-template-columns: 1fr; 
+        gap: 2rem; 
+    }
+    .stats-grid {
+        gap: 1.2rem;
+    }
+    .glass-card { 
+        padding: 1.6rem 1.4rem; 
+        border-radius: 16px;
+    }
+    .stat-box i {
+        font-size: 1.3rem;
+        margin-bottom: 0.6rem;
+    }
+    .accent-text {
+        font-size: 1.4rem;
+    }
+    .info-block h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    .info-block p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .image-block img {
+        height: 250px;
+        border-radius: 14px;
+    }
+
+    /* Cards Stack (Prótese) */
+    .cards-stack {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .cards-stack .glass-card {
+        padding: 1.8rem 1.4rem;
+    }
+    .cards-stack i {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+    .cards-stack h4 {
+        font-size: 1.4rem;
+    }
+    .cards-stack p {
+        font-size: 0.92rem;
+    }
+
+    /* Slider de Casos */
+    .comparison-slider { 
+        height: 280px; 
+        border-radius: 14px;
+    }
+    .slider-drag-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+    .img span {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        bottom: 12px;
+    }
+
+    /* Formulário Seletivo */
+    .seletivo-container {
+        padding: 0;
+    }
+    .form-wrapper {
+        padding: 1.8rem 1.4rem;
+        border-radius: 16px;
+    }
+    .input-group {
+        margin-bottom: 1rem;
+    }
+    input, select, textarea {
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+    }
+    .submit-btn {
+        padding: 0.95rem;
+        font-size: 1rem;
+    }
+
+    /* Rodapé */
+    footer {
+        padding: 30px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 420px) {
+    header {
+        padding: 14px 14px;
+    }
+    .nav-logo {
+        height: 40px;
+    }
+    .logo {
+        font-size: 1.35rem;
+    }
+    .nav-cta {
+        font-size: 0.72rem !important;
+        padding: 5px 10px !important;
+    }
+    .hero-text h1 {
+        font-size: 2.3rem;
+    }
+    .main-content {
+        gap: 48px;
+        padding-top: 90px;
+    }
+    .glass-card {
+        padding: 1.3rem 1.1rem;
+    }
+    .comparison-slider {
+        height: 230px;
+    }
 }
