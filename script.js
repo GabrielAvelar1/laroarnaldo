@@ -128,4 +128,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Trigger on load
+
+    // Processo Seletivo - Envio e Confirmação da Candidatura
+    const applyForm = document.getElementById('apply-form');
+    const formWrapper = document.querySelector('.form-wrapper');
+
+    if(applyForm && formWrapper) {
+        applyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            if(submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+            }
+
+            const name = document.getElementById('applicantName') ? document.getElementById('applicantName').value.trim() : 'Candidato(a)';
+            const email = document.getElementById('applicantEmail') ? document.getElementById('applicantEmail').value.trim() : '';
+            const periodSelect = document.getElementById('applicantPeriod');
+            const period = periodSelect ? periodSelect.options[periodSelect.selectedIndex].text : '';
+
+            // Feedback visual imediato e elegante
+            setTimeout(() => {
+                formWrapper.innerHTML = `
+                    <div style="text-align: center; padding: 20px 10px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(15, 94, 181, 0.25); border: 2px solid var(--sapphire-blue); display: inline-flex; justify-content: center; align-items: center; color: var(--light-blue); font-size: 1.8rem; margin-bottom: 1.2rem; box-shadow: 0 0 25px rgba(15, 94, 181, 0.5);">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.8rem; color: #ffffff;">Inscrição Confirmada!</h2>
+                        <p style="font-size: 1.05rem; line-height: 1.6; color: var(--light-blue); margin-bottom: 1rem;">
+                            Obrigado pelo seu interesse, <strong>${name}</strong>!
+                        </p>
+                        <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85; margin-bottom: 1.8rem; color: #ffffff;">
+                            Recebemos sua candidatura referente ao <strong>${period}</strong>.<br>
+                            Em breve enviaremos os próximos passos e orientações para: <br><strong style="color: var(--light-blue);">${email}</strong>
+                        </p>
+                        <a href="#inicio" class="submit-btn" style="display: inline-block; text-decoration: none; max-width: 240px; margin: 0 auto; text-align: center;">Voltar ao Início</a>
+                    </div>
+                `;
+            }, 600);
+        });
+    }
 });

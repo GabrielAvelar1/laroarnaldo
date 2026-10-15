@@ -128,24 +128,31 @@
                         
                         <form id="apply-form">
                             <div class="input-group">
-                                <input type="text" placeholder="Nome Completo" required>
+                                <input type="text" name="nome" id="applicantName" placeholder="Nome Completo" required>
                             </div>
                             <div class="input-group">
-                                <input type="email" placeholder="E-mail Acadêmico" required>
+                                <input type="email" name="email" id="applicantEmail" placeholder="E-mail Acadêmico" required>
                             </div>
                             <div class="input-group">
-                                <select required>
+                                <select name="periodo" id="applicantPeriod" required>
                                     <option value="" disabled selected>Período atual</option>
-                                    <option value="4">4º Período</option>
-                                    <option value="5">5º Período</option>
-                                    <option value="6">6º Período</option>
-                                    <option value="7">7º Período em diante</option>
+                                    <option value="1º Período">1º Período</option>
+                                    <option value="2º Período">2º Período</option>
+                                    <option value="3º Período">3º Período</option>
+                                    <option value="4º Período">4º Período</option>
+                                    <option value="5º Período">5º Período</option>
+                                    <option value="6º Período">6º Período</option>
+                                    <option value="7º Período">7º Período</option>
+                                    <option value="8º Período">8º Período</option>
+                                    <option value="9º Período">9º Período</option>
+                                    <option value="10º Período">10º Período</option>
+                                    <option value="Outro / Pós-graduação">Outro / Pós-graduação</option>
                                 </select>
                             </div>
                             <div class="input-group">
-                                <textarea placeholder="Por que você quer entrar para a Liga? (Sua motivação)" rows="4" required></textarea>
+                                <textarea name="motivacao" id="applicantMotivation" placeholder="Por que você quer entrar para a Liga? (Sua motivação)" rows="4" required></textarea>
                             </div>
-                            <button type="submit" class="submit-btn arrow-btn">Enviar Candidatura</button>
+                            <button type="submit" class="submit-btn arrow-btn" id="submitBtn">Enviar Candidatura</button>
                         </form>
                     </div>
                 </div>
