@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Trigger on load
 
-    // Processo Seletivo - Envio para gabriel.avlr@outlook.com via Formspree & Confirmação
+    // Processo Seletivo - Envio para laroarnaldo@gmail.com via FormSubmit & Confirmação
     const applyForm = document.getElementById('apply-form');
     const formWrapper = document.querySelector('.form-wrapper');
 
@@ -153,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = new FormData(applyForm);
 
             try {
-                // Envio assíncrono para o FormSubmit (gabriel.avlr@outlook.com)
-                await fetch('https://formsubmit.co/ajax/gabriel.avlr@outlook.com', {
+                // Envio assíncrono para o FormSubmit (laroarnaldo@gmail.com)
+                await fetch('https://formsubmit.co/ajax/laroarnaldo@gmail.com', {
                     method: 'POST',
                     body: formData,
                     headers: {
