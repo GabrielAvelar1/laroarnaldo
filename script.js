@@ -417,8 +417,46 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    const renderizarConfirmacaoPalestra = (dados) => {
+        if (!palestraView) return;
+        palestraView.style.display = 'block';
+        palestraView.classList.add('visible');
+        if (seletivoView) seletivoView.style.display = 'none';
+
+        palestraView.innerHTML = `
+            <div style="text-align: center; padding: 20px 10px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(15, 94, 181, 0.25); border: 2px solid var(--sapphire-blue); display: inline-flex; justify-content: center; align-items: center; color: var(--light-blue); font-size: 1.8rem; margin-bottom: 1.2rem; box-shadow: 0 0 25px rgba(15, 94, 181, 0.5);">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div class="status-badge exclusive-badge" style="margin: 0 auto 1rem auto;">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Membro Confirmado • 1ª Palestra LARO</span>
+                </div>
+                <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.8rem; color: #ffffff;">Inscrição e Comprovante Enviados!</h2>
+                <p style="font-size: 1.05rem; line-height: 1.6; color: var(--light-blue); margin-bottom: 1rem;">
+                    Parabéns, <strong>${dados.name || 'Membro(a)'}</strong>! Sua inscrição no <strong>Hands-On — Prof. Dr. Emilio Akaki</strong> foi registrada com sucesso.
+                </p>
+                <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85; margin-bottom: 1.8rem; color: #ffffff;">
+                    ${dados.period ? `Vínculo: <strong>${dados.period}</strong> • ` : ''}${dados.phone ? `WhatsApp: <strong>${dados.phone}</strong><br>` : ''}
+                    ${dados.fileName ? `Comprovante anexado: <strong style="color: #7ef7d1;">${dados.fileName}</strong><br>` : ''}
+                    ${dados.email ? `Confirmação enviada para: <strong style="color: var(--light-blue);">${dados.email}</strong>` : ''}
+                </p>
+                <a href="index.html#inicio" class="submit-btn" style="display: inline-block; text-decoration: none; max-width: 240px; margin: 0 auto; text-align: center;">Voltar ao Início</a>
+            </div>
+        `;
+    };
+
+    // Se retornou do redirecionamento pós-envio do FormSubmit (?inscrito=1), exibe a confirmação
+    if (urlParams.get('inscrito') === '1' && palestraView) {
+        let dadosSalvos = {};
+        try {
+            dadosSalvos = JSON.parse(sessionStorage.getItem('laro_palestra_inscrito') || '{}');
+        } catch (e) {}
+        renderizarConfirmacaoPalestra(dadosSalvos);
+    }
+
     if (lectureForm && palestraView) {
-        lectureForm.addEventListener('submit', async (e) => {
+        lectureForm.addEventListener('submit', (e) => {
             const receiptFile = memberReceiptInput && memberReceiptInput.files && memberReceiptInput.files[0];
             if (!receiptFile) {
                 e.preventDefault();
@@ -429,12 +467,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            e.preventDefault();
-
-            const lectureSubmitBtn = document.getElementById('lectureSubmitBtn');
-            if (lectureSubmitBtn) {
-                lectureSubmitBtn.disabled = true;
-                lectureSubmitBtn.textContent = 'Enviando inscrição e comprovante...';
+            if (window.location.protocol === 'file:') {
+                e.preventDefault();
+                if (receiptErrorMsg) {
+                    receiptErrorMsg.textContent = 'Atenção: O FormSubmit bloqueia envios feitos abrindo o arquivo direto da pasta (file://). Para que o e-mail com anexo chegue, abra pelo link oficial do GitHub Pages.';
+                    receiptErrorMsg.style.display = 'block';
+                }
+                return;
             }
 
             const name = document.getElementById('memberName') ? document.getElementById('memberName').value.trim() : 'Membro(a)';
@@ -443,59 +482,31 @@ document.addEventListener("DOMContentLoaded", () => {
             const periodSelect = document.getElementById('memberPeriod');
             const period = periodSelect ? periodSelect.options[periodSelect.selectedIndex].text : '';
 
-            const formData = new FormData(lectureForm);
-
+            // Salva dados na sessão para exibir o card personalizado ao retornar do envio nativo
             try {
-                // Envio multipart/form-data com verificação real de entrega no servidor FormSubmit
-                const response = await fetch('https://formsubmit.co/ajax/laroarnaldo@gmail.com', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                const resData = await response.json();
+                sessionStorage.setItem('laro_palestra_inscrito', JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    period,
+                    fileName: receiptFile.name
+                }));
+            } catch (err) {}
 
-                if (!response.ok || resData.success === 'false' || resData.success === false) {
-                    throw new Error(resData.message || 'Falha no envio da inscrição.');
-                }
-            } catch (err) {
-                if (lectureSubmitBtn) {
-                    lectureSubmitBtn.disabled = false;
-                    lectureSubmitBtn.textContent = 'Confirmar Inscrição e Enviar Comprovante';
-                }
-                if (receiptErrorMsg) {
-                    if (window.location.protocol === 'file:') {
-                        receiptErrorMsg.textContent = 'Atenção: O FormSubmit bloqueia envios feitos abrindo o arquivo direto da pasta (file://). Para que o e-mail chegue, teste via servidor local (http://localhost) ou após publicado no GitHub Pages.';
-                    } else {
-                        receiptErrorMsg.textContent = 'Não foi possível confirmar o envio. Verifique sua conexão com a internet e tente novamente.';
-                    }
-                    receiptErrorMsg.style.display = 'block';
-                }
-                return;
+            // Configura URL de retorno (_next) para a página atual com ?inscrito=1
+            const nextInput = document.getElementById('lectureNextUrl');
+            if (nextInput && window.location.protocol.startsWith('http')) {
+                const baseUrl = window.location.origin + window.location.pathname;
+                nextInput.value = `${baseUrl}?inscrito=1`;
             }
 
-            palestraView.innerHTML = `
-                <div style="text-align: center; padding: 20px 10px;">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(15, 94, 181, 0.25); border: 2px solid var(--sapphire-blue); display: inline-flex; justify-content: center; align-items: center; color: var(--light-blue); font-size: 1.8rem; margin-bottom: 1.2rem; box-shadow: 0 0 25px rgba(15, 94, 181, 0.5);">
-                        <i class="fa-solid fa-user-check"></i>
-                    </div>
-                    <div class="status-badge exclusive-badge" style="margin: 0 auto 1rem auto;">
-                        <i class="fa-solid fa-user-shield"></i>
-                        <span>Membro Confirmado • 1ª Palestra LARO</span>
-                    </div>
-                    <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.8rem; color: #ffffff;">Inscrição e Comprovante Enviados!</h2>
-                    <p style="font-size: 1.05rem; line-height: 1.6; color: var(--light-blue); margin-bottom: 1rem;">
-                        Parabéns, <strong>${name}</strong>! Sua inscrição na <strong>1ª Palestra Oficial da L.A.R.O.</strong> foi registrada com sucesso.
-                    </p>
-                    <p style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85; margin-bottom: 1.8rem; color: #ffffff;">
-                        Vínculo: <strong>${period}</strong> • WhatsApp: <strong>${phone}</strong><br>
-                        Comprovante anexado: <strong style="color: #7ef7d1;">${receiptFile.name}</strong><br>
-                        Confirmação enviada para: <strong style="color: var(--light-blue);">${email}</strong>
-                    </p>
-                    <a href="#inicio" class="submit-btn" style="display: inline-block; text-decoration: none; max-width: 240px; margin: 0 auto; text-align: center;">Voltar ao Início</a>
-                </div>
-            `;
+            const lectureSubmitBtn = document.getElementById('lectureSubmitBtn');
+            if (lectureSubmitBtn) {
+                lectureSubmitBtn.textContent = 'Enviando comprovante em anexo... Aguarde';
+            }
+            // IMPORTANTE: Não usamos e.preventDefault() nem /ajax/ aqui!
+            // O envio nativo multipart/form-data para https://formsubmit.co/laroarnaldo@gmail.com
+            // garante que o arquivo real (name="attachment") chegue anexado ao e-mail no Gmail.
         });
     }
 });
