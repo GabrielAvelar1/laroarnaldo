@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Painel da Diretoria | L.A.R.O. Arnaldo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { cursor: auto !important; }
+        a, button, input, select { cursor: pointer !important; }
+        input[type="text"], input[type="email"], input[type="password"], input[type="search"] { cursor: text !important; }
+
+        .admin-wrapper {
+            min-height: 100vh;
+            padding: 36px 5% 60px 5%;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .admin-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .admin-brand img {
+            height: 56px;
+            width: auto;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 12px rgba(15, 94, 181, 0.5));
+        }
+        .admin-brand-titles h1 {
+            font-size: 1.9rem;
+            line-height: 1.1;
+        }
+        .admin-brand-titles span {
+            font-size: 0.78rem;
+            color: var(--light-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Tela de Login Restrito */
+        .login-center-container {
+            min-height: calc(100vh - 180px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            max-width: 440px;
+            width: 100%;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+        .login-lock-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(15, 94, 181, 0.25);
+            border: 1.5px solid var(--sapphire-blue);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-blue);
+            font-size: 1.6rem;
+            margin-bottom: 1.1rem;
+            box-shadow: 0 0 25px rgba(15, 94, 181, 0.35);
+        }
+        .password-input-wrap {
+            position: relative;
+        }
+        .toggle-pass-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 1rem;
+            padding: 6px;
+        }
+        .toggle-pass-btn:hover {
+            color: var(--light-blue);
+        }
+        .login-error {
+            display: none;
+            background: rgba(235, 64, 52, 0.16);
+            border: 1px solid #ff6b6b;
+            color: #ff9e9e;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        /* Dashboard Admin */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .kpi-card {
+            padding: 1.4rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .kpi-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(15, 94, 181, 0.28);
+            border: 1px solid rgba(156, 197, 248, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-blue);
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+        .kpi-info span {
+            display: block;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--light-blue);
+            margin-bottom: 4px;
+        }
+        .kpi-info strong {
+            font-size: 1.75rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: #ffffff;
+        }
+
+        .admin-controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1.2rem 1.4rem;
+        }
+        .admin-tabs-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .admin-tab {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--blue-border);
+            background: rgba(5, 11, 20, 0.65);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.86rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.25s;
+        }
+        .admin-tab.active {
+            background: var(--sapphire-blue);
+            border-color: var(--sapphire-blue);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(15, 94, 181, 0.45);
+        }
+        .admin-search-actions {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 620px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+        .admin-search-input {
+            flex: 1;
+            min-width: 210px;
+            padding: 0.75rem 1rem !important;
+            font-size: 0.88rem !important;
+        }
+        .admin-action-btn {
+            padding: 0.75rem 1.1rem;
+            border-radius: 10px;
+            border: 1px solid var(--blue-border);
+            background: rgba(15, 94, 181, 0.25);
+            color: #ffffff;
+            font-size: 0.84rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: 0.25s;
+            white-space: nowrap;
+        }
+        .admin-action-btn:hover {
+            background: var(--sapphire-blue);
+            border-color: var(--sapphire-blue);
+        }
+        .admin-logout-btn {
+            background: rgba(235, 64, 52, 0.18);
+            border-color: rgba(255, 107, 107, 0.4);
+            color: #ffb3b3;
+        }
+        .admin-logout-btn:hover {
+            background: rgba(235, 64, 52, 0.38);
+            border-color: #ff6b6b;
+            color: #ffffff;
+        }
+
+        /* Tabela de Inscritos */
+        .admin-table-card {
+            padding: 0 !important;
+            overflow: hidden;
+        }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 820px;
+        }
+        .admin-table th {
+            background: rgba(5, 11, 20, 0.85);
+            color: var(--light-blue);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--blue-border);
+            font-weight: 600;
+        }
+        .admin-table td {
+            padding: 15px 18px;
+            border-bottom: 1px solid rgba(156, 197, 248, 0.12);
+            font-size: 0.88rem;
+            color: #ffffff;
+            vertical-align: middle;
+        }
+        .admin-table tr:hover td {
+            background: rgba(15, 94, 181, 0.12);
+        }
+        .protocol-badge {
+            font-family: monospace;
+            font-size: 0.8rem;
+            background: rgba(15, 94, 181, 0.28);
+            border: 1px solid rgba(156, 197, 248, 0.35);
+            color: var(--light-blue);
+            padding: 4px 9px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .status-pill-admin {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 11px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-pill-admin.verificado {
+            background: rgba(32, 180, 134, 0.24);
+            border: 1px solid #20b486;
+            color: #7ef7d1;
+        }
+        .status-pill-admin.confirmada {
+            background: rgba(15, 94, 181, 0.28);
+            border: 1px solid var(--sapphire-blue);
+            color: var(--light-blue);
+        }
+        .table-btn {
+            padding: 6px 11px;
+            border-radius: 8px;
+            border: 1px solid var(--blue-border);
+            background: rgba(15, 94, 181, 0.3);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: 0.2s;
+            margin-right: 4px;
+        }
+        .table-btn:hover {
+            background: var(--sapphire-blue);
+        }
+        .table-btn.verify-btn {
+            background: rgba(32, 180, 134, 0.22);
+            border-color: #20b486;
+            color: #7ef7d1;
+        }
+        .table-btn.verify-btn:hover {
+            background: #20b486;
+            color: #050b14;
+        }
+        .whatsapp-link {
+            color: #7ef7d1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+        .whatsapp-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal para Visualizar Comprovante */
+        .receipt-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 8, 16, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .receipt-modal-backdrop.active {
+            display: flex;
+        }
+        .receipt-modal-card {
+            max-width: 680px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            background: #081221;
+            border: 1px solid var(--sapphire-blue);
+            border-radius: 18px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        }
+        .receipt-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--blue-border);
+            margin-bottom: 1rem;
+        }
+        .receipt-modal-body {
+            flex: 1;
+            overflow-y: auto;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 12px;
+            padding: 12px;
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .receipt-modal-body img {
+            max-width: 100%;
+            max-height: 62vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        .receipt-modal-body iframe {
+            width: 100%;
+            height: 62vh;
+            border: none;
+            border-radius: 8px;
+        }
+        .receipt-modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--blue-border);
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .admin-wrapper { padding: 20px 14px 40px 14px; }
+            .admin-controls-bar { padding: 1rem; }
+            .admin-search-actions { max-width: 100%; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-wrapper">
+        
+        <!-- TOPBAR -->
+        <div class="admin-topbar">
+            <div class="admin-brand">
+                <img src="logo_liga_sem_fundo.png" alt="Logo LARO">
+                <div class="admin-brand-titles">
+                    <span>Gestão Interna • L.A.R.O. Arnaldo</span>
+                    <h1>Painel da Diretoria</h1>
+                </div>
+            </div>
+
+            <div id="adminTopActions" style="display: none; gap: 10px; align-items: center;">
+                <button type="button" class="admin-action-btn" onclick="carregarDadosAdmin()">
+                    <i class="fa-solid fa-rotate"></i> Atualizar
+                </button>
+                <button type="button" class="admin-action-btn admin-logout-btn" onclick="realizarLogoutAdmin()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </button>
+            </div>
+        </div>
+
+        <!-- TELA 1: LOGIN RESTRITO -->
+        <div id="adminLoginScreen" class="login-center-container">
+            <div class="glass-card login-card">
+                <div class="login-lock-icon">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.4rem;">Acesso Restrito</h2>
+                <p style="font-size: 0.92rem; color: var(--light-blue); margin-bottom: 1.8rem;">
+                    Área exclusiva para a Diretoria da Liga Acadêmica de Reabilitação Oral.
+                </p>
+
+                <div id="loginErrorBox" class="login-error">
+                    <i class="fa-solid fa-circle-exclamation"></i> Credenciais inválidas. Verifique o e-mail e a senha da diretoria.
+                </div>
+
+                <form id="adminLoginForm">
+                    <div class="input-group" style="text-align: left;">
+                        <input type="email" id="adminEmailInput" placeholder="E-mail da Diretoria" autocomplete="username" required>
+                    </div>
+                    <div class="input-group password-input-wrap" style="text-align: left;">
+                        <input type="password" id="adminPassInput" placeholder="Senha de Acesso" autocomplete="current-password" required style="padding-right: 44px;">
+                        <button type="button" class="toggle-pass-btn" onclick="toggleAdminPass()" title="Mostrar/Ocultar Senha">
+                            <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fa-solid fa-unlock-keyhole" style="margin-right: 6px;"></i> Entrar no Painel
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TELA 2: DASHBOARD ADMINISTRATIVO -->
+        <div id="adminDashboardScreen" style="display: none;">
+            
+            <!-- KPIs -->
+            <div class="kpi-grid">
+                <div class="glass-card kpi-card">
+                    <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+                    <div class="kpi-info">
+                        <span>Inscritos 1ª Palestra</span>
+                        <strong id="kpiTotalPalestra">0</strong>
+                    </div>
+                </div>
+                <div class="glass-card kpi-card">
+                    <div class="kpi-icon"><i class="fa-brands fa-pix"></i></div>
+                    <div class="kpi-info">
+                        <span>Total Arrecadado (Pix)</span>
+                        <strong id="kpiValorTotal">R$ 0,00</strong>
+                    </div>
+                </div>
+                <div class="glass-card kpi-card">
+                    <div class="kpi-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                    <div class="kpi-info">
+                        <span>Pagamentos Verificados</span>
+                        <strong id="kpiVerificados">0</strong>
+                    </div>
+                </div>
+                <div class="glass-card kpi-card">
+                    <div class="kpi-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="kpi-info">
+                        <span>Processo Seletivo</span>
+                        <strong id="kpiTotalSeletivo">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BARRA DE FILTROS E ABAS -->
+            <div class="glass-card admin-controls-bar">
+                <div class="admin-tabs-group">
+                    <button type="button" class="admin-tab active" id="tabAdminPalestra" onclick="mudarAbaAdmin('palestra')">
+                        <i class="fa-solid fa-chalkboard-user"></i> Inscritos 1ª Palestra (Hands-On)
+                    </button>
+                    <button type="button" class="admin-tab" id="tabAdminSeletivo" onclick="mudarAbaAdmin('seletivo')">
+                        <i class="fa-solid fa-id-card"></i> Inscritos Processo Seletivo
+                    </button>
+                </div>
+
+                <div class="admin-search-actions">
+                    <input type="search" id="adminSearchInput" class="admin-search-input" placeholder="Buscar por nome, e-mail, período ou protocolo..." oninput="filtrarTabelaAdmin()">
+                    <button type="button" class="admin-action-btn" onclick="exportarCSVAdmin()">
+                        <i class="fa-solid fa-file-csv"></i> Exportar Planilha (CSV)
+                    </button>
+                </div>
+            </div>
+
+            <!-- TABELA 1: INSCRITOS DA 1ª PALESTRA -->
+            <div id="sectionAdminPalestra" class="glass-card admin-table-card">
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Protocolo</th>
+                                <th>Data / Hora</th>
+                                <th>Nome do Membro</th>
+                                <th>Período</th>
+                                <th>E-mail / WhatsApp</th>
+                                <th>Status</th>
+                                <th>Comprovante &amp; Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyPalestra">
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--light-blue);">
+                                    Carregando inscritos...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TABELA 2: INSCRITOS DO PROCESSO SELETIVO -->
+            <div id="sectionAdminSeletivo" class="glass-card admin-table-card" style="display: none;">
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Data / Hora</th>
+                                <th>Nome do Candidato</th>
+                                <th>E-mail</th>
+                                <th>Período</th>
+                                <th>Motivação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodySeletivo">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 40px; color: var(--light-blue);">
+                                    Carregando candidatos...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL DE VISUALIZAÇÃO DE COMPROVANTE -->
+    <div class="receipt-modal-backdrop" id="receiptModal">
+        <div class="receipt-modal-card">
+            <div class="receipt-modal-header">
+                <div>
+                    <span class="info-label" id="modalMemberProtocol">Protocolo</span>
+                    <h3 id="modalMemberName" style="font-size: 1.5rem; color: #ffffff;">Nome do Membro</h3>
+                </div>
+                <button type="button" class="admin-action-btn" onclick="fecharModalComprovante()">
+                    <i class="fa-solid fa-xmark"></i> Fechar
+                </button>
+            </div>
+            <div class="receipt-modal-body" id="modalReceiptContainer"></div>
+            <div class="receipt-modal-footer">
+                <span id="modalFileName" style="font-size: 0.82rem; color: var(--light-blue);">comprovante.jpg</span>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <a id="modalOpenNewTabBtn" href="#" target="_blank" rel="noopener" class="table-btn">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Original
+                    </a>
+                    <button type="button" class="table-btn verify-btn" id="modalVerifyBtn">
+                        <i class="fa-solid fa-check-double"></i> Marcar Pagamento Verificado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuração Supabase
+        const SUPABASE_ADMIN = {
+            restUrl: 'https://nscwgutnytrbytlzzvil.supabase.co/rest/v1',
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zY3dndXRueXRyYnl0bHp6dmlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2Mjk5ODcsImV4cCI6MjEwMDIwNTk4N30.cTzm3Hs2aov367E2uFBT4ZDyUZQNmvhF5yF-5hZyPUA',
+            tablePalestra: 'laro_arnaldo_palestra_inscricoes',
+            tableSeletivo: 'laro_arnaldo_processo_seletivo'
+        };
+
+        // Credenciais exigidas pela Diretoria
+        const ADMIN_EMAIL_OFICIAL = 'laroarnaldo@gmail.com';
+        const ADMIN_SENHA_OFICIAL = '@Laro2026dp';
+        const SESSION_KEY = 'laro_admin_auth_2026';
+
+        let listaPalestraGlobal = [];
+        let listaSeletivoGlobal = [];
+        let abaAtivaAdmin = 'palestra';
+
+        function toggleAdminPass() {
+            const passInput = document.getElementById('adminPassInput');
+            const eyeIcon = document.getElementById('eyeIcon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                eyeIcon.className = 'fa-regular fa-eye-slash';
+            } else {
+                passInput.type = 'password';
+                eyeIcon.className = 'fa-regular fa-eye';
+            }
+        }
+
+        function verificarSessaoAdmin() {
+            if (sessionStorage.getItem(SESSION_KEY) === 'autenticado') {
+                mostrarDashboardAdmin();
+            }
+        }
+
+        function mostrarDashboardAdmin() {
+            document.getElementById('adminLoginScreen').style.display = 'none';
+            document.getElementById('adminDashboardScreen').style.display = 'block';
+            document.getElementById('adminTopActions').style.display = 'flex';
+            carregarDadosAdmin();
+        }
+
+        function realizarLogoutAdmin() {
+            sessionStorage.removeItem(SESSION_KEY);
+            document.getElementById('adminDashboardScreen').style.display = 'none';
+            document.getElementById('adminTopActions').style.display = 'none';
+            document.getElementById('adminLoginScreen').style.display = 'flex';
+            document.getElementById('adminPassInput').value = '';
+        }
+
+        document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailDigitado = document.getElementById('adminEmailInput').value.trim().toLowerCase();
+            const senhaDigitada = document.getElementById('adminPassInput').value;
+            const errorBox = document.getElementById('loginErrorBox');
+
+            if (emailDigitado === ADMIN_EMAIL_OFICIAL && senhaDigitada === ADMIN_SENHA_OFICIAL) {
+                errorBox.style.display = 'none';
+                sessionStorage.setItem(SESSION_KEY, 'autenticado');
+                mostrarDashboardAdmin();
+            } else {
+                errorBox.style.display = 'block';
+            }
+        });
+
+        function mudarAbaAdmin(aba) {
+            abaAtivaAdmin = aba;
+            document.getElementById('tabAdminPalestra').classList.toggle('active', aba === 'palestra');
+            document.getElementById('tabAdminSeletivo').classList.toggle('active', aba === 'seletivo');
+            document.getElementById('sectionAdminPalestra').style.display = aba === 'palestra' ? 'block' : 'none';
+            document.getElementById('sectionAdminSeletivo').style.display = aba === 'seletivo' ? 'block' : 'none';
+            filtrarTabelaAdmin();
+        }
+
+        async function carregarDadosAdmin() {
+            const tbodyPalestra = document.getElementById('tbodyPalestra');
+            const tbodySeletivo = document.getElementById('tbodySeletivo');
+
+            try {
+                const [resPalestra, resSeletivo] = await Promise.all([
+                    fetch(`${SUPABASE_ADMIN.restUrl}/${SUPABASE_ADMIN.tablePalestra}?select=*&order=created_at.desc`, {
+                        headers: {
+                            'apikey': SUPABASE_ADMIN.anonKey,
+                            'Authorization': `Bearer ${SUPABASE_ADMIN.anonKey}`
+                        }
+                    }),
+                    fetch(`${SUPABASE_ADMIN.restUrl}/${SUPABASE_ADMIN.tableSeletivo}?select=*&order=created_at.desc`, {
+                        headers: {
+                            'apikey': SUPABASE_ADMIN.anonKey,
+                            'Authorization': `Bearer ${SUPABASE_ADMIN.anonKey}`
+                        }
+                    })
+                ]);
+
+                if (resPalestra.ok) {
+                    listaPalestraGlobal = await resPalestra.json();
+                }
+                if (resSeletivo.ok) {
+                    listaSeletivoGlobal = await resSeletivo.json();
+                }
+
+                atualizarKPIs();
+                filtrarTabelaAdmin();
+            } catch (err) {
+                console.error('Erro ao carregar dados no painel:', err);
+                tbodyPalestra.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 30px; color: #ff8a8a;">Erro ao conectar ao Supabase. Verifique se você já executou o script SQL no Supabase.</td></tr>`;
+            }
+        }
+
+        function atualizarKPIs() {
+            const totalPalestra = listaPalestraGlobal.length;
+            const totalValor = totalPalestra * 15;
+            const totalVerificados = listaPalestraGlobal.filter(i => (i.status_inscricao || '').toLowerCase().includes('verificad')).length;
+
+            document.getElementById('kpiTotalPalestra').textContent = totalPalestra;
+            document.getElementById('kpiValorTotal').textContent = `R$ ${totalValor.toFixed(2).replace('.', ',')}`;
+            document.getElementById('kpiVerificados').textContent = `${totalVerificados} / ${totalPalestra}`;
+            document.getElementById('kpiTotalSeletivo').textContent = listaSeletivoGlobal.length;
+        }
+
+        function filtrarTabelaAdmin() {
+            const termo = (document.getElementById('adminSearchInput').value || '').trim().toLowerCase();
+
+            // Renderiza tabela da Palestra
+            const filtradosPalestra = listaPalestraGlobal.filter(item => {
+                if (!termo) return true;
+                return (
+                    (item.nome_completo || '').toLowerCase().includes(termo) ||
+                    (item.email || '').toLowerCase().includes(termo) ||
+                    (item.whatsapp || '').toLowerCase().includes(termo) ||
+                    (item.periodo || '').toLowerCase().includes(termo) ||
+                    (item.protocolo || '').toLowerCase().includes(termo)
+                );
+            });
+
+            const tbodyPalestra = document.getElementById('tbodyPalestra');
+            if (filtradosPalestra.length === 0) {
+                tbodyPalestra.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 36px; color: rgba(255,255,255,0.65);">Nenhuma inscrição encontrada.</td></tr>`;
+            } else {
+                tbodyPalestra.innerHTML = filtradosPalestra.map(item => {
+                    const dataHora = item.created_at
+                        ? new Date(item.created_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })
+                        : '-';
+                    const isVerificado = (item.status_inscricao || '').toLowerCase().includes('verificad');
+                    const statusClass = isVerificado ? 'verificado' : 'confirmada';
+                    const statusLabel = isVerificado ? 'Pagamento Verificado' : (item.status_inscricao || 'Confirmada');
+                    const wppDigits = (item.whatsapp || '').replace(/\D/g, '');
+                    const wppHref = wppDigits ? `https://wa.me/55${wppDigits}` : '#';
+
+                    return `
+                        <tr>
+                            <td><span class="protocol-badge">${item.protocolo || '-'}</span></td>
+                            <td>${dataHora}</td>
+                            <td><strong>${item.nome_completo || '-'}</strong></td>
+                            <td>${item.periodo || '-'}</td>
+                            <td>
+                                <div>${item.email || '-'}</div>
+                                ${wppDigits ? `<a href="${wppHref}" target="_blank" rel="noopener" class="whatsapp-link"><i class="fa-brands fa-whatsapp"></i> ${item.whatsapp}</a>` : `<small>${item.whatsapp || ''}</small>`}
+                            </td>
+                            <td>
+                                <span class="status-pill-admin ${statusClass}">
+                                    <i class="fa-solid ${isVerificado ? 'fa-check-double' : 'fa-clock'}"></i>
+                                    ${statusLabel}
+                                </span>
+                            </td>
+                            <td>
+                                <button type="button" class="table-btn" onclick="abrirModalComprovante(${item.id})">
+                                    <i class="fa-solid fa-eye"></i> Ver Comprovante
+                                </button>
+                                <button type="button" class="table-btn verify-btn" onclick="alternarStatusVerificado(${item.id}, '${isVerificado ? 'Confirmada' : 'Pagamento Verificado'}')">
+                                    <i class="fa-solid ${isVerificado ? 'fa-rotate-left' : 'fa-check'}"></i> ${isVerificado ? 'Desfazer' : 'Validar'}
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // Renderiza tabela do Processo Seletivo
+            const filtradosSeletivo = listaSeletivoGlobal.filter(item => {
+                if (!termo) return true;
+                return (
+                    (item.nome_completo || '').toLowerCase().includes(termo) ||
+                    (item.email || '').toLowerCase().includes(termo) ||
+                    (item.periodo || '').toLowerCase().includes(termo) ||
+                    (item.motivacao || '').toLowerCase().includes(termo)
+                );
+            });
+
+            const tbodySeletivo = document.getElementById('tbodySeletivo');
+            if (filtradosSeletivo.length === 0) {
+                tbodySeletivo.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 36px; color: rgba(255,255,255,0.65);">Nenhuma inscrição do processo seletivo encontrada.</td></tr>`;
+            } else {
+                tbodySeletivo.innerHTML = filtradosSeletivo.map((item, idx) => {
+                    const dataHora = item.created_at
+                        ? new Date(item.created_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' })
+                        : '-';
+                    return `
+                        <tr>
+                            <td>${idx + 1}</td>
+                            <td>${dataHora}</td>
+                            <td><strong>${item.nome_completo || '-'}</strong></td>
+                            <td>${item.email || '-'}</td>
+                            <td>${item.periodo || '-'}</td>
+                            <td style="max-width: 340px; line-height: 1.5;">${item.motivacao || '-'}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        }
+
+        function abrirModalComprovante(id) {
+            const item = listaPalestraGlobal.find(r => r.id === id);
+            if (!item) return;
+
+            document.getElementById('modalMemberProtocol').textContent = `${item.protocolo || 'LARO'} • ${item.periodo || ''}`;
+            document.getElementById('modalMemberName').textContent = item.nome_completo || 'Membro';
+            document.getElementById('modalFileName').textContent = item.comprovante_nome || 'Comprovante anexado';
+
+            const container = document.getElementById('modalReceiptContainer');
+            const src = (item.comprovante_url && item.comprovante_url.startsWith('http'))
+                ? item.comprovante_url
+                : (item.comprovante_base64 || item.comprovante_url || '');
+
+            const openBtn = document.getElementById('modalOpenNewTabBtn');
+            if (src) {
+                openBtn.href = src;
+                openBtn.style.display = 'inline-flex';
+            } else {
+                openBtn.style.display = 'none';
+            }
+
+            const isPdf = (item.comprovante_nome || '').toLowerCase().endsWith('.pdf') || src.startsWith('data:application/pdf');
+            if (!src) {
+                container.innerHTML = `<p style="color: #ff9e9e;">Nenhum arquivo de comprovante encontrado para este registro.</p>`;
+            } else if (isPdf) {
+                container.innerHTML = `<iframe src="${src}"></iframe>`;
+            } else {
+                container.innerHTML = `<img src="${src}" alt="Comprovante de ${item.nome_completo}">`;
+            }
+
+            const isVerificado = (item.status_inscricao || '').toLowerCase().includes('verificad');
+            const verifyBtn = document.getElementById('modalVerifyBtn');
+            verifyBtn.innerHTML = isVerificado
+                ? '<i class="fa-solid fa-rotate-left"></i> Voltar para Confirmada'
+                : '<i class="fa-solid fa-check-double"></i> Marcar Pagamento Verificado';
+            verifyBtn.onclick = async () => {
+                await alternarStatusVerificado(item.id, isVerificado ? 'Confirmada' : 'Pagamento Verificado');
+                fecharModalComprovante();
+            };
+
+            document.getElementById('receiptModal').classList.add('active');
+        }
+
+        function fecharModalComprovante() {
+            document.getElementById('receiptModal').classList.remove('active');
+            document.getElementById('modalReceiptContainer').innerHTML = '';
+        }
+
+        async function alternarStatusVerificado(id, novoStatus) {
+            try {
+                const res = await fetch(`${SUPABASE_ADMIN.restUrl}/${SUPABASE_ADMIN.tablePalestra}?id=eq.${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'apikey': SUPABASE_ADMIN.anonKey,
+                        'Authorization': `Bearer ${SUPABASE_ADMIN.anonKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status_inscricao: novoStatus })
+                });
+                if (res.ok) {
+                    const idx = listaPalestraGlobal.findIndex(r => r.id === id);
+                    if (idx !== -1) listaPalestraGlobal[idx].status_inscricao = novoStatus;
+                    atualizarKPIs();
+                    filtrarTabelaAdmin();
+                }
+            } catch (err) {
+                console.error('Erro ao atualizar status:', err);
+            }
+        }
+
+        function exportarCSVAdmin() {
+            const dados = abaAtivaAdmin === 'palestra' ? listaPalestraGlobal : listaSeletivoGlobal;
+            if (!dados || dados.length === 0) {
+                alert('Não há registros para exportar.');
+                return;
+            }
+
+            let csv = '\uFEFF'; // BOM para acentuação no Excel
+            if (abaAtivaAdmin === 'palestra') {
+                csv += 'Protocolo;Data_Hora;Nome_Completo;Email;WhatsApp;Periodo;Valor;Status;Link_Comprovante\n';
+                dados.forEach(r => {
+                    const data = r.created_at ? new Date(r.created_at).toLocaleString('pt-BR') : '';
+                    const link = (r.comprovante_url && r.comprovante_url.startsWith('http')) ? r.comprovante_url : (r.comprovante_nome || '');
+                    csv += `"${r.protocolo || ''}";"${data}";"${r.nome_completo || ''}";"${r.email || ''}";"${r.whatsapp || ''}";"${r.periodo || ''}";"${r.valor_pago || 'R$ 15,00'}";"${r.status_inscricao || ''}";"${link}"\n`;
+                });
+            } else {
+                csv += 'ID;Data_Hora;Nome_Completo;Email;Periodo;Motivacao\n';
+                dados.forEach(r => {
+                    const data = r.created_at ? new Date(r.created_at).toLocaleString('pt-BR') : '';
+                    const motiv = (r.motivacao || '').replace(/"/g, '""').replace(/\r?\n/g, ' ');
+                    csv += `"${r.id || ''}";"${data}";"${r.nome_completo || ''}";"${r.email || ''}";"${r.periodo || ''}";"${motiv}"\n`;
+                });
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `inscritos_${abaAtivaAdmin}_laro_arnaldo.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        verificarSessaoAdmin();
+    </script>
+</body>
+</html>

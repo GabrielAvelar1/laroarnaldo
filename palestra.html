@@ -209,20 +209,23 @@
                                         </label>
 
                                         <button type="submit" class="submit-btn arrow-btn" id="lectureSubmitBtn">Confirmar Inscrição e Enviar Comprovante</button>
+                                        <button type="button" class="secondary-consult-btn" onclick="switchPalestraTab('consultar')">
+                                            <i class="fa-solid fa-magnifying-glass"></i> Já se inscreveu? Consultar Inscrição
+                                        </button>
                                     </form>
                                 </div>
 
-                                <!-- PAINEL 2: CONSULTAR INSCRIÇÃO -->
+                                <!-- PAINEL 2: CONSULTAR INSCRIÇÃO (APENAS POR E-MAIL) -->
                                 <div id="panelConsultar" style="display: none;">
-                                    <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.4rem;">Consultar Minha Inscrição</h2>
-                                    <p class="lecture-subtitle">Digite o <strong>e-mail</strong> ou <strong>WhatsApp</strong> utilizado no cadastro para verificar o status da sua inscrição e comprovante.</p>
+                                    <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.4rem;">Consultar Inscrição</h2>
+                                    <p class="lecture-subtitle">Digite o <strong>e-mail</strong> utilizado na inscrição para confirmar que você está inscrito(a) na 1ª Palestra.</p>
 
                                     <form id="lookup-form">
                                         <div class="input-group">
-                                            <input type="text" id="lookupQuery" placeholder="Digite seu E-mail ou Telefone/WhatsApp" required>
+                                            <input type="email" id="lookupQuery" placeholder="Digite o e-mail cadastrado na inscrição" required>
                                         </div>
                                         <button type="submit" class="submit-btn arrow-btn" id="lookupSubmitBtn">
-                                            <i class="fa-solid fa-magnifying-glass" style="margin-right: 6px;"></i> Buscar Inscrição
+                                            <i class="fa-solid fa-magnifying-glass" style="margin-right: 6px;"></i> Confirmar Minha Inscrição
                                         </button>
                                     </form>
 

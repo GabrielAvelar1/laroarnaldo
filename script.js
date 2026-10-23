@@ -631,16 +631,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 const cleanEmail = rawQuery.toLowerCase();
-                const onlyDigits = rawQuery.replace(/\D/g, '');
-                let filterUrl = `${SUPABASE_LARO.restUrl}/${SUPABASE_LARO.tablePalestra}?select=protocolo,nome_completo,email,whatsapp,periodo,evento,valor_pago,comprovante_nome,comprovante_url,status_inscricao,created_at&order=created_at.desc`;
-
-                if (rawQuery.includes('@')) {
-                    filterUrl += `&email=ilike.${encodeURIComponent(cleanEmail)}`;
-                } else if (onlyDigits.length >= 8) {
-                    filterUrl += `&whatsapp=ilike.*${encodeURIComponent(onlyDigits.slice(-8))}*`;
-                } else {
-                    filterUrl += `&or=(email.ilike.*${encodeURIComponent(cleanEmail)}*,protocolo.ilike.*${encodeURIComponent(rawQuery)}*)`;
-                }
+                const filterUrl = `${SUPABASE_LARO.restUrl}/${SUPABASE_LARO.tablePalestra}?select=protocolo,nome_completo,email,whatsapp,periodo,evento,valor_pago,comprovante_nome,comprovante_url,status_inscricao,created_at&email=ilike.${encodeURIComponent(cleanEmail)}&order=created_at.desc`;
 
                 const res = await fetch(filterUrl, {
                     method: 'GET',
@@ -661,8 +652,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     lookupResultBox.innerHTML = `
                         <div style="text-align: center; padding: 10px;">
                             <i class="fa-solid fa-circle-exclamation" style="font-size: 1.6rem; color: #ff9f7b; margin-bottom: 8px;"></i>
-                            <p style="color: #ffffff; font-size: 0.92rem; margin-bottom: 4px;"><strong>Nenhuma inscrição encontrada</strong> para "${rawQuery}".</p>
-                            <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; margin: 0;">Verifique se digitou o mesmo e-mail ou WhatsApp usado no cadastro.</p>
+                            <p style="color: #ffffff; font-size: 0.92rem; margin-bottom: 4px;"><strong>Nenhuma inscrição encontrada</strong> para o e-mail "${rawQuery}".</p>
+                            <p style="color: rgba(255,255,255,0.7); font-size: 0.8rem; margin: 0;">Verifique se digitou exatamente o mesmo e-mail utilizado na inscrição.</p>
                         </div>
                     `;
                 } else {
