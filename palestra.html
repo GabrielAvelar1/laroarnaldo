@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Inscrição 1ª Palestra & Hands-On | LARO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="ui-layer">
+        
+        <header>
+            <a href="index.html" class="logo-container fade-in d-1" style="text-decoration: none; color: inherit;">
+                <img src="logo_liga_sem_fundo.png" alt="Logo L.A.R.O." class="nav-logo">
+                <div class="logo">L.A.R.O<span>.</span></div>
+            </a>
+            
+            <nav class="nav-pill fade-in d-2">
+                <a href="index.html#inicio">Início</a>
+                <a href="index.html#restauracao">Dentística</a>
+                <a href="index.html#protese">Prótese</a>
+                <a href="index.html#casos">Casos</a>
+                <a href="index.html" class="nav-cta"><i class="fa-solid fa-arrow-left" style="margin-right: 6px;"></i> Voltar ao Site</a>
+                <button class="hamburger" onclick="toggleMenu()" title="Menu"><i class="fa-solid fa-bars"></i></button>
+            </nav>
+        </header>
+
+        <main class="main-content palestra-page-main">
+            <section class="content-section">
+                <div class="container">
+                    
+                    <div class="palestra-page-header text-center fade-up d-2">
+                        <div class="status-badge exclusive-badge" style="margin: 0 auto 1rem auto;">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>Exclusivo para Membros da L.A.R.O. • Hands-On</span>
+                        </div>
+                        <h1 class="palestra-hero-title">Técnica Classe IV <span>com Muralha Palatina</span></h1>
+                        <p class="palestra-hero-subtitle">Hands-On com <strong>Prof. Dr. Emilio Akaki</strong> • Parceria LARO &amp; LADE</p>
+                    </div>
+
+                    <div class="palestra-split-layout fade-up d-3">
+                        
+                        <!-- COLUNA ESQUERDA: CARTAZ OFICIAL + DETALHES DO EVENTO -->
+                        <div class="palestra-poster-column">
+                            <div class="poster-card glass-card">
+                                <div class="poster-img-wrapper">
+                                    <img src="primeirapalestra.jpg" alt="Hands On Técnica Classe IV com Muralha Palatina - Prof. Dr. Emilio Akaki">
+                                    <span class="poster-location-overlay">Faculdade Arnaldo</span>
+                                </div>
+                                
+                                <div class="event-highlights-list">
+                                    <div class="event-highlight-row">
+                                        <div class="highlight-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                                        <div>
+                                            <span class="info-label">Ministrante</span>
+                                            <strong>Prof. Dr. Emilio Akaki</strong>
+                                        </div>
+                                    </div>
+                                    <div class="event-highlight-row">
+                                        <div class="highlight-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                                        <div>
+                                            <span class="info-label">Data e Horário</span>
+                                            <strong>03/11 às 17h</strong>
+                                        </div>
+                                    </div>
+                                    <div class="event-highlight-row">
+                                        <div class="highlight-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                        <div>
+                                            <span class="info-label">Local</span>
+                                            <strong>Faculdade Arnaldo</strong>
+                                        </div>
+                                    </div>
+                                    <div class="event-highlight-row">
+                                        <div class="highlight-icon"><i class="fa-solid fa-handshake"></i></div>
+                                        <div>
+                                            <span class="info-label">Parceria &amp; Apoio</span>
+                                            <strong>LARO + LADE • Materiais: TDV &amp; FGM Esthetics</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COLUNA DIREITA: PAGAMENTO PIX + FORMULÁRIO DE INSCRIÇÃO -->
+                        <div class="palestra-form-column">
+                            <div class="form-wrapper glass-card" id="palestra-view" style="max-width: 100%;">
+                                <div class="closed-notice-pill">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    <span>1ª Palestra &amp; Hands-On Oficial</span>
+                                </div>
+
+                                <h2 class="title-reveal" style="font-size: 2.4rem; margin-bottom: 0.4rem;">Garanta sua Vaga</h2>
+                                <p class="lecture-subtitle">Realize o pagamento da taxa de inscrição de <strong>R$ 15,00</strong> via Pix abaixo e anexe o comprovante para confirmar sua participação.</p>
+
+                                <!-- BLOCO DE PAGAMENTO PIX (QR CODE + COPIA E COLA) -->
+                                <div class="pix-payment-card">
+                                    <div class="pix-header">
+                                        <div class="pix-badge">
+                                            <i class="fa-brands fa-pix"></i>
+                                            <span>Taxa de Inscrição (Pix)</span>
+                                        </div>
+                                        <span class="pix-amount">R$ 15,00</span>
+                                    </div>
+
+                                    <div class="pix-body">
+                                        <div class="pix-qr-box">
+                                            <img src="qrcode_pix_15.png" alt="QR Code Pix R$ 15,00 - LARO">
+                                            <span class="qr-caption">Escaneie no app do banco</span>
+                                        </div>
+
+                                        <div class="pix-details">
+                                            <div class="pix-field-group">
+                                                <span class="pix-field-label">Chave Pix (CPF):</span>
+                                                <div class="pix-copy-row">
+                                                    <code id="pixKeyText">16415347616</code>
+                                                    <button type="button" class="copy-pix-btn" id="copyKeyBtn" onclick="copyPixValue('16415347616', 'copyKeyBtn', 'Copiar Chave')">
+                                                        <i class="fa-regular fa-copy"></i> <span>Copiar Chave</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="pix-field-group">
+                                                <span class="pix-field-label">Pix Copia e Cola (R$ 15,00):</span>
+                                                <div class="pix-copy-row">
+                                                    <input type="text" id="pixPayloadInput" class="pix-payload-readonly" value="00020126330014br.gov.bcb.pix011116415347616520400005303986540515.005802BR5904LARO6014BELO HORIZONTE62070503***63040B07" readonly>
+                                                    <button type="button" class="copy-pix-btn copy-brcode-btn" id="copyPayloadBtn" onclick="copyPixValue(document.getElementById('pixPayloadInput').value, 'copyPayloadBtn', 'Copia e Cola')">
+                                                        <i class="fa-solid fa-qrcode"></i> <span>Copia e Cola</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <iframe name="formsubmit_iframe" id="formsubmit_iframe" style="display: none;"></iframe>
+
+                                <form id="lecture-form" action="https://formsubmit.co/laroarnaldo@gmail.com" method="POST" enctype="multipart/form-data" target="formsubmit_iframe">
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input type="hidden" name="_subject" value="Inscrição + Comprovante Hands-On Prof. Dr. Emilio Akaki (03/11) - LARO">
+                                    <input type="hidden" name="_template" value="table">
+                                    <input type="hidden" name="evento" value="Hands-On: Técnica Classe IV com Muralha Palatina - Prof. Dr. Emilio Akaki (03/11 às 17h - Faculdade Arnaldo)">
+                                    <input type="hidden" name="valor_inscricao" value="R$ 15,00 (Chave Pix: 16415347616)">
+                                    <input type="hidden" name="comprovante_arquivo" id="receiptFileNameField" value="">
+
+                                    <div class="input-group">
+                                        <input type="text" name="nome" id="memberName" placeholder="Nome Completo do Membro" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="email" name="email" id="memberEmail" placeholder="E-mail Acadêmico" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="tel" name="whatsapp" id="memberPhone" placeholder="Telefone / WhatsApp com DDD" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <select name="periodo" id="memberPeriod" required>
+                                            <option value="" disabled selected>Período atual</option>
+                                            <option value="1º Período">1º Período</option>
+                                            <option value="2º Período">2º Período</option>
+                                            <option value="3º Período">3º Período</option>
+                                            <option value="4º Período">4º Período</option>
+                                            <option value="5º Período">5º Período</option>
+                                            <option value="6º Período">6º Período</option>
+                                            <option value="7º Período">7º Período</option>
+                                            <option value="8º Período">8º Período</option>
+                                            <option value="9º Período">9º Período</option>
+                                            <option value="10º Período">10º Período</option>
+                                            <option value="Outro / Pós-graduação">Outro / Pós-graduação</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- UPLOAD OBRIGATÓRIO DO COMPROVANTE PIX -->
+                                    <div class="receipt-upload-wrapper">
+                                        <label class="receipt-upload-label" for="memberReceipt" id="receiptDropzone">
+                                            <input type="file" name="attachment" id="memberReceipt" accept="image/png,image/jpeg,image/jpg,image/webp,application/pdf" required>
+                                            <div class="receipt-upload-content" id="receiptUploadDefault">
+                                                <div class="receipt-icon-circle">
+                                                    <i class="fa-solid fa-file-arrow-up"></i>
+                                                </div>
+                                                <div class="receipt-upload-texts">
+                                                    <strong>Anexar Comprovante Pix (Obrigatório)</strong>
+                                                    <span>Toque para enviar imagem (PNG, JPG) ou PDF (máx. 5MB)</span>
+                                                </div>
+                                            </div>
+                                            <div class="receipt-upload-selected" id="receiptUploadSelected" style="display: none;">
+                                                <img id="receiptPreviewImg" alt="Prévia do comprovante" style="display: none;">
+                                                <div class="receipt-file-icon" id="receiptPdfIcon" style="display: none;">
+                                                    <i class="fa-solid fa-file-pdf"></i>
+                                                </div>
+                                                <div class="receipt-selected-info">
+                                                    <strong id="receiptFileName">comprovante.jpg</strong>
+                                                    <span id="receiptFileSize">Comprovante pronto para envio</span>
+                                                </div>
+                                                <span class="receipt-change-badge"><i class="fa-solid fa-check"></i> Anexado</span>
+                                            </div>
+                                        </label>
+                                        <p class="receipt-error-msg" id="receiptErrorMsg" style="display: none;"></p>
+                                    </div>
+
+                                    <label class="member-checkbox-group" for="memberConfirm">
+                                        <input type="checkbox" name="confirmacao_membro" id="memberConfirm" value="Confirmado: Membro Efetivo LARO" required>
+                                        <span class="checkbox-custom"></span>
+                                        <span class="checkbox-label">Confirmo que sou <strong>membro efetivo da L.A.R.O.</strong> e anexei o comprovante de pagamento de R$ 15,00.</span>
+                                    </label>
+
+                                    <button type="submit" class="submit-btn arrow-btn" id="lectureSubmitBtn">Confirmar Inscrição e Enviar Comprovante</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <footer>
+                <p>&copy; 2026 Liga Acadêmica de Reabilitação Oral. Todos os direitos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Mobile Fullscreen Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+        <a href="index.html#inicio" onclick="toggleMenu()">Início</a>
+        <a href="index.html#restauracao" onclick="toggleMenu()">Dentística</a>
+        <a href="index.html#protese" onclick="toggleMenu()">Prótese</a>
+        <a href="index.html#casos" onclick="toggleMenu()">Casos</a>
+        <a href="index.html" onclick="toggleMenu()">Voltar ao Site</a>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
