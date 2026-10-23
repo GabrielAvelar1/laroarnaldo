@@ -201,11 +201,22 @@
                                             <p class="receipt-error-msg" id="receiptErrorMsg" style="display: none;"></p>
                                         </div>
 
-                                        <label class="member-checkbox-group" for="memberConfirm">
-                                            <input type="checkbox" name="confirmacao_membro" id="memberConfirm" value="Confirmado: Membro da LARO ou Aluno da UniBH" required>
-                                            <span class="checkbox-custom"></span>
-                                            <span class="checkbox-label">Confirmo que sou <strong>membro da L.A.R.O. ou aluno(a) da UniBH</strong> e anexei o comprovante de pagamento de R$ 15,00.</span>
-                                        </label>
+                                        <div class="vinculo-group" style="margin-bottom: 1.5rem;">
+    <p style="margin-bottom: 10px; font-size: 0.95rem; opacity: 0.9;">Selecione o seu vínculo (confirma pagamento de R$ 15,00):</p>
+    
+    <label class="member-checkbox-group" for="vinculoLaro" style="margin-bottom: 10px; display: block;">
+        <input type="radio" name="vinculo" id="vinculoLaro" value="Membro LARO" required>
+        <span class="checkbox-custom" style="border-radius: 50%;"></span>
+        <span class="checkbox-label">Sou <strong>membro da L.A.R.O.</strong> e anexei o comprovante.</span>
+    </label>
+
+    <label class="member-checkbox-group" for="vinculoUniBH" style="display: block;">
+        <input type="radio" name="vinculo" id="vinculoUniBH" value="Aluno UniBH" required>
+        <span class="checkbox-custom" style="border-radius: 50%;"></span>
+        <span class="checkbox-label">Sou <strong>aluno(a) da UniBH</strong> e anexei o comprovante.</span>
+    </label>
+</div>
+
 
                                         <button type="submit" class="submit-btn arrow-btn" id="lectureSubmitBtn">Confirmar Inscrição e Enviar Comprovante</button>
                                         <button type="button" class="secondary-consult-btn" onclick="switchPalestraTab('consultar')">
