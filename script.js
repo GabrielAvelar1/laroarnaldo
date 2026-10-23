@@ -530,7 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         email: email.toLowerCase(),
                         whatsapp: phone,
                         periodo: period,
-                        evento: 'Hands-On: Técnica Classe IV com Muralha Palatina - Prof. Dr. Emilio Akaki (03/11 às 17h - Faculdade Arnaldo)',
+                        evento: 'Hands-On: Técnica Classe IV com Muralha Palatina - Prof. Dr. Emilio Akaki (03/11 às 17h - UniBH)',
                         valor_pago: 'R$ 15,00',
                         comprovante_nome: receiptFile.name,
                         comprovante_url: comprovantePublicUrl,
@@ -582,7 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </p>
                             <div class="lookup-card-item" style="text-align: left; margin-bottom: 1.4rem;">
                                 <div class="lookup-row"><span>Evento:</span> Hands-On Técnica Classe IV — Prof. Dr. Emilio Akaki</div>
-                                <div class="lookup-row"><span>Data e Local:</span> 03/11 às 17h • Faculdade Arnaldo</div>
+                                <div class="lookup-row"><span>Data e Local:</span> 03/11 às 17h • UniBH</div>
                                 <div class="lookup-row"><span>Membro:</span> ${name} (${period})</div>
                                 <div class="lookup-row"><span>E-mail:</span> ${email}</div>
                                 <div class="lookup-row"><span>Comprovante:</span> ${receiptFile.name}</div>
@@ -674,7 +674,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <div class="lookup-row"><span>Membro:</span> ${item.nome_completo} (${item.periodo})</div>
                                 <div class="lookup-row"><span>E-mail:</span> ${item.email}</div>
                                 <div class="lookup-row"><span>WhatsApp:</span> ${item.whatsapp}</div>
-                                <div class="lookup-row"><span>Evento:</span> Hands-On Prof. Dr. Emilio Akaki (03/11 às 17h - Faculdade Arnaldo)</div>
+                                <div class="lookup-row"><span>Evento:</span> Hands-On Prof. Dr. Emilio Akaki (03/11 às 17h - UniBH)</div>
                                 <div class="lookup-row"><span>Comprovante:</span> ${item.comprovante_nome || 'Anexado'} (${item.valor_pago || 'R$ 15,00'})</div>
                                 ${dataFormatada ? `<div class="lookup-row"><span>Data do Registro:</span> ${dataFormatada}</div>` : ''}
                                 ${linkComprovante}
