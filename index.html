@@ -223,117 +223,139 @@
                             </a>
                         </div>
 
-                        <!-- BLOCO DE PAGAMENTO PIX (QR CODE + COPIA E COLA) -->
-                        <div class="pix-payment-card">
-                            <div class="pix-header">
-                                <div class="pix-badge">
-                                    <i class="fa-brands fa-pix"></i>
-                                    <span>Pagamento via Pix</span>
-                                </div>
-                                <span class="pix-amount">R$ 15,00</span>
-                            </div>
-
-                            <div class="pix-body">
-                                <div class="pix-qr-box">
-                                    <img src="qrcode_pix_15.png" alt="QR Code Pix R$ 15,00 - LARO" id="pixQrImg">
-                                    <span class="qr-caption">Escaneie no app do seu banco</span>
-                                </div>
-
-                                <div class="pix-details">
-                                    <div class="pix-field-group">
-                                        <span class="pix-field-label">Chave Pix (CPF):</span>
-                                        <div class="pix-copy-row">
-                                            <code id="pixKeyText">16415347616</code>
-                                            <button type="button" class="copy-pix-btn" id="copyKeyBtn" onclick="copyPixValue('16415347616', 'copyKeyBtn', 'Copiar Chave')">
-                                                <i class="fa-regular fa-copy"></i> <span>Copiar Chave</span>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="pix-field-group">
-                                        <span class="pix-field-label">Pix Copia e Cola (R$ 15,00):</span>
-                                        <div class="pix-copy-row">
-                                            <input type="text" id="pixPayloadInput" class="pix-payload-readonly" value="00020126330014br.gov.bcb.pix011116415347616520400005303986540515.005802BR5904LARO6014BELO HORIZONTE62070503***63040B07" readonly>
-                                            <button type="button" class="copy-pix-btn copy-brcode-btn" id="copyPayloadBtn" onclick="copyPixValue(document.getElementById('pixPayloadInput').value, 'copyPayloadBtn', 'Copia e Cola')">
-                                                <i class="fa-solid fa-qrcode"></i> <span>Copia e Cola</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- ABAS: NOVA INSCRIÇÃO / CONSULTAR INSCRIÇÃO -->
+                        <div class="palestra-tabs">
+                            <button type="button" class="palestra-tab-btn active" id="tabBtnInscrever" onclick="switchPalestraTab('inscrever')">
+                                <i class="fa-solid fa-pen-to-square"></i> Fazer Inscrição
+                            </button>
+                            <button type="button" class="palestra-tab-btn" id="tabBtnConsultar" onclick="switchPalestraTab('consultar')">
+                                <i class="fa-solid fa-magnifying-glass"></i> Consultar Inscrição
+                            </button>
                         </div>
 
-                        <form id="lecture-form" action="https://formsubmit.co/laroarnaldo@gmail.com" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_subject" value="Inscrição + Comprovante Hands-On Prof. Dr. Emilio Akaki (03/11) - LARO">
-                            <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_next" id="lectureNextUrl" value="https://gabrielavelar1.github.io/laroarnaldo/palestra.html?inscrito=1">
-                            <input type="hidden" name="evento" value="Hands-On: Técnica Classe IV com Muralha Palatina - Prof. Dr. Emilio Akaki (03/11 às 17h - Faculdade Arnaldo)">
-                            <input type="hidden" name="valor_inscricao" value="R$ 15,00 (Chave Pix: 16415347616)">
-                            <input type="hidden" name="comprovante_arquivo" id="receiptFileNameField" value="">
+                        <!-- PAINEL 1: FAZER INSCRIÇÃO -->
+                        <div id="panelInscrever">
+                            <!-- BLOCO DE PAGAMENTO PIX (QR CODE + COPIA E COLA) -->
+                            <div class="pix-payment-card">
+                                <div class="pix-header">
+                                    <div class="pix-badge">
+                                        <i class="fa-brands fa-pix"></i>
+                                        <span>Pagamento via Pix</span>
+                                    </div>
+                                    <span class="pix-amount">R$ 15,00</span>
+                                </div>
 
-                            <div class="input-group">
-                                <input type="text" name="nome" id="memberName" placeholder="Nome Completo do Membro" required>
-                            </div>
-                            <div class="input-group">
-                                <input type="email" name="email" id="memberEmail" placeholder="E-mail Acadêmico" required>
-                            </div>
-                            <div class="input-group">
-                                <input type="tel" name="whatsapp" id="memberPhone" placeholder="Telefone / WhatsApp com DDD" required>
-                            </div>
-                            <div class="input-group">
-                                <select name="periodo" id="memberPeriod" required>
-                                    <option value="" disabled selected>Período atual</option>
-                                    <option value="1º Período">1º Período</option>
-                                    <option value="2º Período">2º Período</option>
-                                    <option value="3º Período">3º Período</option>
-                                    <option value="4º Período">4º Período</option>
-                                    <option value="5º Período">5º Período</option>
-                                    <option value="6º Período">6º Período</option>
-                                    <option value="7º Período">7º Período</option>
-                                    <option value="8º Período">8º Período</option>
-                                    <option value="9º Período">9º Período</option>
-                                    <option value="10º Período">10º Período</option>
-                                    <option value="Outro / Pós-graduação">Outro / Pós-graduação</option>
-                                </select>
-                            </div>
+                                <div class="pix-body">
+                                    <div class="pix-qr-box">
+                                        <img src="qrcode_pix_15.png" alt="QR Code Pix R$ 15,00 - LARO" id="pixQrImg">
+                                        <span class="qr-caption">Escaneie no app do seu banco</span>
+                                    </div>
 
-                            <!-- UPLOAD OBRIGATÓRIO DO COMPROVANTE PIX -->
-                            <div class="receipt-upload-wrapper">
-                                <label class="receipt-upload-label" for="memberReceipt" id="receiptDropzone">
-                                    <input type="file" name="attachment" id="memberReceipt" accept="image/png,image/jpeg,image/jpg,image/webp,application/pdf" required>
-                                    <div class="receipt-upload-content" id="receiptUploadDefault">
-                                        <div class="receipt-icon-circle">
-                                            <i class="fa-solid fa-file-arrow-up"></i>
+                                    <div class="pix-details">
+                                        <div class="pix-field-group">
+                                            <span class="pix-field-label">Chave Pix (CPF):</span>
+                                            <div class="pix-copy-row">
+                                                <code id="pixKeyText">16415347616</code>
+                                                <button type="button" class="copy-pix-btn" id="copyKeyBtn" onclick="copyPixValue('16415347616', 'copyKeyBtn', 'Copiar Chave')">
+                                                    <i class="fa-regular fa-copy"></i> <span>Copiar Chave</span>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div class="receipt-upload-texts">
-                                            <strong>Anexar Comprovante Pix (Obrigatório)</strong>
-                                            <span>Toque para enviar imagem (PNG, JPG) ou PDF (máx. 5MB)</span>
+
+                                        <div class="pix-field-group">
+                                            <span class="pix-field-label">Pix Copia e Cola (R$ 15,00):</span>
+                                            <div class="pix-copy-row">
+                                                <input type="text" id="pixPayloadInput" class="pix-payload-readonly" value="00020126330014br.gov.bcb.pix011116415347616520400005303986540515.005802BR5904LARO6014BELO HORIZONTE62070503***63040B07" readonly>
+                                                <button type="button" class="copy-pix-btn copy-brcode-btn" id="copyPayloadBtn" onclick="copyPixValue(document.getElementById('pixPayloadInput').value, 'copyPayloadBtn', 'Copia e Cola')">
+                                                    <i class="fa-solid fa-qrcode"></i> <span>Copia e Cola</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="receipt-upload-selected" id="receiptUploadSelected" style="display: none;">
-                                        <img id="receiptPreviewImg" alt="Prévia do comprovante" style="display: none;">
-                                        <div class="receipt-file-icon" id="receiptPdfIcon" style="display: none;">
-                                            <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                            </div>
+
+                            <form id="lecture-form">
+                                <div class="input-group">
+                                    <input type="text" name="nome" id="memberName" placeholder="Nome Completo do Membro" required>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" name="email" id="memberEmail" placeholder="E-mail Acadêmico" required>
+                                </div>
+                                <div class="input-group">
+                                    <input type="tel" name="whatsapp" id="memberPhone" placeholder="Telefone / WhatsApp com DDD" required>
+                                </div>
+                                <div class="input-group">
+                                    <select name="periodo" id="memberPeriod" required>
+                                        <option value="" disabled selected>Período atual</option>
+                                        <option value="1º Período">1º Período</option>
+                                        <option value="2º Período">2º Período</option>
+                                        <option value="3º Período">3º Período</option>
+                                        <option value="4º Período">4º Período</option>
+                                        <option value="5º Período">5º Período</option>
+                                        <option value="6º Período">6º Período</option>
+                                        <option value="7º Período">7º Período</option>
+                                        <option value="8º Período">8º Período</option>
+                                        <option value="9º Período">9º Período</option>
+                                        <option value="10º Período">10º Período</option>
+                                        <option value="Outro / Pós-graduação">Outro / Pós-graduação</option>
+                                    </select>
+                                </div>
+
+                                <!-- UPLOAD OBRIGATÓRIO DO COMPROVANTE PIX -->
+                                <div class="receipt-upload-wrapper">
+                                    <label class="receipt-upload-label" for="memberReceipt" id="receiptDropzone">
+                                        <input type="file" name="attachment" id="memberReceipt" accept="image/png,image/jpeg,image/jpg,image/webp,application/pdf" required>
+                                        <div class="receipt-upload-content" id="receiptUploadDefault">
+                                            <div class="receipt-icon-circle">
+                                                <i class="fa-solid fa-file-arrow-up"></i>
+                                            </div>
+                                            <div class="receipt-upload-texts">
+                                                <strong>Anexar Comprovante Pix (Obrigatório)</strong>
+                                                <span>Toque para enviar imagem (PNG, JPG) ou PDF (máx. 5MB)</span>
+                                            </div>
                                         </div>
-                                        <div class="receipt-selected-info">
-                                            <strong id="receiptFileName">comprovante.jpg</strong>
-                                            <span id="receiptFileSize">Comprovante pronto para envio</span>
+                                        <div class="receipt-upload-selected" id="receiptUploadSelected" style="display: none;">
+                                            <img id="receiptPreviewImg" alt="Prévia do comprovante" style="display: none;">
+                                            <div class="receipt-file-icon" id="receiptPdfIcon" style="display: none;">
+                                                <i class="fa-solid fa-file-pdf"></i>
+                                            </div>
+                                            <div class="receipt-selected-info">
+                                                <strong id="receiptFileName">comprovante.jpg</strong>
+                                                <span id="receiptFileSize">Comprovante pronto para envio</span>
+                                            </div>
+                                            <span class="receipt-change-badge"><i class="fa-solid fa-check"></i> Anexado</span>
                                         </div>
-                                        <span class="receipt-change-badge"><i class="fa-solid fa-check"></i> Anexado</span>
-                                    </div>
+                                    </label>
+                                    <p class="receipt-error-msg" id="receiptErrorMsg" style="display: none;"></p>
+                                </div>
+
+                                <label class="member-checkbox-group" for="memberConfirm">
+                                    <input type="checkbox" name="confirmacao_membro" id="memberConfirm" value="Confirmado: Membro Efetivo LARO" required>
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-label">Confirmo que sou <strong>membro efetivo da L.A.R.O.</strong> e anexei o comprovante de pagamento de R$ 15,00.</span>
                                 </label>
-                                <p class="receipt-error-msg" id="receiptErrorMsg" style="display: none;"></p>
-                            </div>
 
-                            <label class="member-checkbox-group" for="memberConfirm">
-                                <input type="checkbox" name="confirmacao_membro" id="memberConfirm" value="Confirmado: Membro Efetivo LARO" required>
-                                <span class="checkbox-custom"></span>
-                                <span class="checkbox-label">Confirmo que sou <strong>membro efetivo da L.A.R.O.</strong> e anexei o comprovante de pagamento de R$ 15,00.</span>
-                            </label>
+                                <button type="submit" class="submit-btn arrow-btn" id="lectureSubmitBtn">Confirmar Inscrição e Enviar Comprovante</button>
+                            </form>
+                        </div>
 
-                            <button type="submit" class="submit-btn arrow-btn" id="lectureSubmitBtn">Confirmar Inscrição e Enviar Comprovante</button>
-                        </form>
+                        <!-- PAINEL 2: CONSULTAR INSCRIÇÃO -->
+                        <div id="panelConsultar" style="display: none;">
+                            <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.4rem;">Consultar Minha Inscrição</h2>
+                            <p class="lecture-subtitle">Digite o <strong>e-mail</strong> ou <strong>WhatsApp</strong> utilizado no cadastro para verificar o status da sua inscrição e comprovante.</p>
+
+                            <form id="lookup-form">
+                                <div class="input-group">
+                                    <input type="text" id="lookupQuery" placeholder="Digite seu E-mail ou Telefone/WhatsApp" required>
+                                </div>
+                                <button type="submit" class="submit-btn arrow-btn" id="lookupSubmitBtn">
+                                    <i class="fa-solid fa-magnifying-glass" style="margin-right: 6px;"></i> Buscar Inscrição
+                                </button>
+                            </form>
+
+                            <div id="lookupResultBox" class="lookup-result-box" style="display: none;"></div>
+                        </div>
                     </div>
 
                 </div>
