@@ -515,6 +515,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     comprovantePublicUrl = comprovanteBase64;
                 }
 
+                                // ---> NOVO: Captura o vínculo selecionado <---
+                const vinculoInput = document.querySelector('input[name="vinculo"]:checked');
+                const vinculoSelecionado = vinculoInput ? vinculoInput.value : 'Não informado';
+
                 // 3) Salva os dados completos da inscrição na tabela laro_arnaldo_palestra_inscricoes
                 const dbRes = await fetch(`${SUPABASE_LARO.restUrl}/${SUPABASE_LARO.tablePalestra}`, {
                     method: 'POST',
@@ -530,6 +534,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         email: email.toLowerCase(),
                         whatsapp: phone,
                         periodo: period,
+                        vinculo: vinculoSelecionado, // ---> NOVO CAMPO ENVIADO PARA O SUPABASE <---
                         evento: 'Hands-On: Técnica Classe IV com Muralha Palatina - Prof. Dr. Emilio Akaki (03/11 às 17h - UniBH)',
                         valor_pago: 'R$ 15,00',
                         comprovante_nome: receiptFile.name,
@@ -556,6 +561,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             _subject: `Nova Inscrição (${protocolo}) - Hands-On Prof. Emilio Akaki`,
                             Protocolo: protocolo,
                             Nome: name,
+                            Vinculo: vinculoSelecionado, // ---> NOVO: Também envia o vínculo no e-mail <---
                             Email: email,
                             WhatsApp: phone,
                             Periodo: period,
@@ -564,6 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                     }).catch(() => {});
                 }
+
 
                 const panelInscrever = document.getElementById('panelInscrever');
                 if (panelInscrever) {
