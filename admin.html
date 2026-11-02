@@ -267,6 +267,31 @@
             border-radius: 6px;
             font-weight: 600;
         }
+        .vinculo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .vinculo-badge.laro {
+            background: rgba(15, 94, 181, 0.28);
+            border: 1px solid var(--sapphire-blue);
+            color: #9cc5f8;
+        }
+        .vinculo-badge.unibh {
+            background: rgba(225, 45, 85, 0.2);
+            border: 1px solid rgba(255, 99, 132, 0.6);
+            color: #ff9ebb;
+        }
+        .vinculo-badge.indefinido {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.65);
+        }
         .status-pill-admin {
             display: inline-flex;
             align-items: center;
@@ -468,6 +493,7 @@
                     <div class="kpi-info">
                         <span>Inscritos 1ª Palestra</span>
                         <strong id="kpiTotalPalestra">0</strong>
+                        <span id="kpiVinculoBreakdown" style="font-size: 0.74rem; color: var(--light-blue); margin-top: 3px; display: block;">0 LARO • 0 UniBH</span>
                     </div>
                 </div>
                 <div class="glass-card kpi-card">
@@ -520,7 +546,8 @@
                             <tr>
                                 <th>Protocolo</th>
                                 <th>Data / Hora</th>
-                                <th>Nome do Membro</th>
+                                <th>Nome do Inscrito</th>
+                                <th>Vínculo</th>
                                 <th>Período</th>
                                 <th>E-mail / WhatsApp</th>
                                 <th>Status</th>
@@ -529,7 +556,7 @@
                         </thead>
                         <tbody id="tbodyPalestra">
                             <tr>
-                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--light-blue);">
+                                <td colspan="8" style="text-align: center; padding: 40px; color: var(--light-blue);">
                                     Carregando inscritos...
                                 </td>
                             </tr>
@@ -700,7 +727,7 @@
                 filtrarTabelaAdmin();
             } catch (err) {
                 console.error('Erro ao carregar dados no painel:', err);
-                tbodyPalestra.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 30px; color: #ff8a8a;">Erro ao conectar ao Supabase. Verifique se você já executou o script SQL no Supabase.</td></tr>`;
+                tbodyPalestra.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #ff8a8a;">Erro ao conectar ao Supabase. Verifique se você já executou o script SQL no Supabase.</td></tr>`;
             }
         }
 
@@ -708,8 +735,14 @@
             const totalPalestra = listaPalestraGlobal.length;
             const totalValor = totalPalestra * 15;
             const totalVerificados = listaPalestraGlobal.filter(i => (i.status_inscricao || '').toLowerCase().includes('verificad')).length;
+            const totalLaro = listaPalestraGlobal.filter(i => (i.vinculo || '').toLowerCase().includes('laro')).length;
+            const totalUniBH = listaPalestraGlobal.filter(i => (i.vinculo || '').toLowerCase().includes('unibh')).length;
 
             document.getElementById('kpiTotalPalestra').textContent = totalPalestra;
+            const breakdownEl = document.getElementById('kpiVinculoBreakdown');
+            if (breakdownEl) {
+                breakdownEl.textContent = `${totalLaro} LARO • ${totalUniBH} UniBH`;
+            }
             document.getElementById('kpiValorTotal').textContent = `R$ ${totalValor.toFixed(2).replace('.', ',')}`;
             document.getElementById('kpiVerificados').textContent = `${totalVerificados} / ${totalPalestra}`;
             document.getElementById('kpiTotalSeletivo').textContent = listaSeletivoGlobal.length;
@@ -723,6 +756,7 @@
                 if (!termo) return true;
                 return (
                     (item.nome_completo || '').toLowerCase().includes(termo) ||
+                    (item.vinculo || '').toLowerCase().includes(termo) ||
                     (item.email || '').toLowerCase().includes(termo) ||
                     (item.whatsapp || '').toLowerCase().includes(termo) ||
                     (item.periodo || '').toLowerCase().includes(termo) ||
@@ -732,7 +766,7 @@
 
             const tbodyPalestra = document.getElementById('tbodyPalestra');
             if (filtradosPalestra.length === 0) {
-                tbodyPalestra.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 36px; color: rgba(255,255,255,0.65);">Nenhuma inscrição encontrada.</td></tr>`;
+                tbodyPalestra.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 36px; color: rgba(255,255,255,0.65);">Nenhuma inscrição encontrada.</td></tr>`;
             } else {
                 tbodyPalestra.innerHTML = filtradosPalestra.map(item => {
                     const dataHora = item.created_at
@@ -744,11 +778,24 @@
                     const wppDigits = (item.whatsapp || '').replace(/\D/g, '');
                     const wppHref = wppDigits ? `https://wa.me/55${wppDigits}` : '#';
 
+                    const vinculoLower = (item.vinculo || '').toLowerCase();
+                    let vinculoBadgeHtml = '';
+                    if (vinculoLower.includes('laro')) {
+                        vinculoBadgeHtml = `<span class="vinculo-badge laro"><i class="fa-solid fa-star"></i> Membro LARO</span>`;
+                    } else if (vinculoLower.includes('unibh')) {
+                        vinculoBadgeHtml = `<span class="vinculo-badge unibh"><i class="fa-solid fa-graduation-cap"></i> Aluno UniBH</span>`;
+                    } else if (item.vinculo) {
+                        vinculoBadgeHtml = `<span class="vinculo-badge indefinido">${item.vinculo}</span>`;
+                    } else {
+                        vinculoBadgeHtml = `<span class="vinculo-badge indefinido"><i class="fa-regular fa-circle-question"></i> Não inf.</span>`;
+                    }
+
                     return `
                         <tr>
                             <td><span class="protocol-badge">${item.protocolo || '-'}</span></td>
                             <td>${dataHora}</td>
                             <td><strong>${item.nome_completo || '-'}</strong></td>
+                            <td>${vinculoBadgeHtml}</td>
                             <td>${item.periodo || '-'}</td>
                             <td>
                                 <div>${item.email || '-'}</div>
@@ -810,8 +857,9 @@
             const item = listaPalestraGlobal.find(r => r.id === id);
             if (!item) return;
 
-            document.getElementById('modalMemberProtocol').textContent = `${item.protocolo || 'LARO'} • ${item.periodo || ''}`;
-            document.getElementById('modalMemberName').textContent = item.nome_completo || 'Membro';
+            const vinculoTexto = item.vinculo ? ` • ${item.vinculo}` : '';
+            document.getElementById('modalMemberProtocol').textContent = `${item.protocolo || 'LARO'}${vinculoTexto} • ${item.periodo || ''}`;
+            document.getElementById('modalMemberName').textContent = item.nome_completo || 'Inscrito';
             document.getElementById('modalFileName').textContent = item.comprovante_nome || 'Comprovante anexado';
 
             const container = document.getElementById('modalReceiptContainer');
@@ -885,11 +933,11 @@
 
             let csv = '\uFEFF'; // BOM para acentuação no Excel
             if (abaAtivaAdmin === 'palestra') {
-                csv += 'Protocolo;Data_Hora;Nome_Completo;Email;WhatsApp;Periodo;Valor;Status;Link_Comprovante\n';
+                csv += 'Protocolo;Data_Hora;Nome_Completo;Vinculo;Email;WhatsApp;Periodo;Valor;Status;Link_Comprovante\n';
                 dados.forEach(r => {
                     const data = r.created_at ? new Date(r.created_at).toLocaleString('pt-BR') : '';
                     const link = (r.comprovante_url && r.comprovante_url.startsWith('http')) ? r.comprovante_url : (r.comprovante_nome || '');
-                    csv += `"${r.protocolo || ''}";"${data}";"${r.nome_completo || ''}";"${r.email || ''}";"${r.whatsapp || ''}";"${r.periodo || ''}";"${r.valor_pago || 'R$ 15,00'}";"${r.status_inscricao || ''}";"${link}"\n`;
+                    csv += `"${r.protocolo || ''}";"${data}";"${r.nome_completo || ''}";"${r.vinculo || ''}";"${r.email || ''}";"${r.whatsapp || ''}";"${r.periodo || ''}";"${r.valor_pago || 'R$ 15,00'}";"${r.status_inscricao || ''}";"${link}"\n`;
                 });
             } else {
                 csv += 'ID;Data_Hora;Nome_Completo;Email;Periodo;Motivacao\n';
