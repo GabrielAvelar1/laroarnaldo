@@ -175,6 +175,17 @@ select option { background: var(--navy-deep); color: #fff; }
 .exclusive-badge i {
     color: var(--light-blue);
 }
+.closed-badge {
+    background: rgba(235, 64, 52, 0.22);
+    border: 1px solid #ff6b6b;
+    color: #ff9e9e;
+    box-shadow: 0 0 20px rgba(235, 64, 52, 0.25);
+    display: inline-flex;
+    width: fit-content;
+}
+.closed-badge i {
+    color: #ff6b6b;
+}
 
 .lecture-subtitle {
     font-size: 0.98rem;

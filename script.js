@@ -459,8 +459,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lectureForm && palestraView) {
         lectureForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            const receiptFile = memberReceiptInput && memberReceiptInput.files && memberReceiptInput.files[0];
+            alert('As inscrições para a 1ª Palestra & Hands-On estão encerradas, pois o limite máximo de vagas foi atingido.');
+            return;
             if (!receiptFile) {
                 if (receiptErrorMsg) {
                     receiptErrorMsg.textContent = 'Por favor, anexe o comprovante do Pix de R$ 15,00 para concluir sua inscrição.';

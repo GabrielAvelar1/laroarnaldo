@@ -172,9 +172,15 @@
                             <span>Processo Seletivo da Liga Encerrado</span>
                         </div>
 
-                        <div class="status-badge exclusive-badge">
-                            <i class="fa-solid fa-user-shield"></i>
-                            <span>Membros da L.A.R.O. &amp; Alunos UniBH • Hands-On</span>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem;">
+                            <div class="status-badge closed-badge" style="margin-bottom: 0;">
+                                <i class="fa-solid fa-lock"></i>
+                                <span>Inscrições Encerradas • Vagas Esgotadas</span>
+                            </div>
+                            <div class="status-badge exclusive-badge" style="margin-bottom: 0;">
+                                <i class="fa-solid fa-user-shield"></i>
+                                <span>Membros da L.A.R.O. &amp; Alunos UniBH • Hands-On</span>
+                            </div>
                         </div>
 
                         <h2 class="title-reveal" id="lectureTitle" style="font-size: 2.5rem;">Técnica Classe IV com Muralha Palatina</h2>
@@ -222,135 +228,37 @@
                             </a>
                         </div>
 
-                        <!-- ABAS: NOVA INSCRIÇÃO / CONSULTAR INSCRIÇÃO -->
+                        <!-- ABAS: INSCRIÇÕES ENCERRADAS / CONSULTAR INSCRIÇÃO -->
                         <div class="palestra-tabs">
                             <button type="button" class="palestra-tab-btn active" id="tabBtnInscrever" onclick="switchPalestraTab('inscrever')">
-                                <i class="fa-solid fa-pen-to-square"></i> Fazer Inscrição
+                                <i class="fa-solid fa-lock"></i> Inscrições Encerradas
                             </button>
                             <button type="button" class="palestra-tab-btn" id="tabBtnConsultar" onclick="switchPalestraTab('consultar')">
                                 <i class="fa-solid fa-magnifying-glass"></i> Consultar Inscrição
                             </button>
                         </div>
 
-                        <!-- PAINEL 1: FAZER INSCRIÇÃO -->
+                        <!-- PAINEL 1: FAZER INSCRIÇÃO (ENCERRADO - LIMITE DE VAGAS ATINGIDO) -->
                         <div id="panelInscrever">
-                            <!-- BLOCO DE PAGAMENTO PIX (QR CODE + COPIA E COLA) -->
-                            <div class="pix-payment-card">
-                                <div class="pix-header">
-                                    <div class="pix-badge">
-                                        <i class="fa-brands fa-pix"></i>
-                                        <span>Pagamento via Pix</span>
-                                    </div>
-                                    <span class="pix-amount">R$ 15,00</span>
+                            <div class="closed-registration-card" style="text-align: center; padding: 2.8rem 1.8rem; background: rgba(5, 11, 20, 0.7); border: 1px solid rgba(255, 107, 107, 0.4); border-radius: 18px; margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+                                <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(235, 64, 52, 0.2); border: 1.5px solid #ff6b6b; display: inline-flex; align-items: center; justify-content: center; color: #ff9e9e; font-size: 1.9rem; margin-bottom: 1.2rem; box-shadow: 0 0 25px rgba(235, 64, 52, 0.3);">
+                                    <i class="fa-solid fa-lock"></i>
                                 </div>
-
-                                <div class="pix-body">
-                                    <div class="pix-qr-box">
-                                        <img src="qrcode_pix_15.png" alt="QR Code Pix R$ 15,00 - LARO" id="pixQrImg">
-                                        <span class="qr-caption">Escaneie no app do seu banco</span>
-                                    </div>
-
-                                    <div class="pix-details">
-                                        <div class="pix-field-group">
-                                            <span class="pix-field-label">Chave Pix (CPF):</span>
-                                            <div class="pix-copy-row">
-                                                <code id="pixKeyText">16415347616</code>
-                                                <button type="button" class="copy-pix-btn" id="copyKeyBtn" onclick="copyPixValue('16415347616', 'copyKeyBtn', 'Copiar Chave')">
-                                                    <i class="fa-regular fa-copy"></i> <span>Copiar Chave</span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div class="pix-field-group">
-                                            <span class="pix-field-label">Pix Copia e Cola (R$ 15,00):</span>
-                                            <div class="pix-copy-row">
-                                                <input type="text" id="pixPayloadInput" class="pix-payload-readonly" value="00020126330014br.gov.bcb.pix011116415347616520400005303986540515.005802BR5904LARO6014BELO HORIZONTE62070503***63040B07" readonly>
-                                                <button type="button" class="copy-pix-btn copy-brcode-btn" id="copyPayloadBtn" onclick="copyPixValue(document.getElementById('pixPayloadInput').value, 'copyPayloadBtn', 'Copia e Cola')">
-                                                    <i class="fa-solid fa-qrcode"></i> <span>Copia e Cola</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <h2 class="title-reveal" style="font-size: 2.2rem; margin-bottom: 0.5rem; color: #ffffff;">Inscrições Encerradas</h2>
+                                <div style="display: inline-block; background: rgba(235, 64, 52, 0.22); border: 1px solid #ff6b6b; color: #ffb3b3; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.2rem;">
+                                    <i class="fa-solid fa-circle-exclamation"></i> Limite de Vagas Atingido
                                 </div>
-                            </div>
-
-                            <form id="lecture-form">
-                                <div class="input-group">
-                                    <input type="text" name="nome" id="memberName" placeholder="Nome Completo" required>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; line-height: 1.6; max-width: 520px; margin: 0 auto 1.5rem auto;">
+                                    Agradecemos imensamente pelo enorme interesse! As vagas para a 1ª Palestra &amp; Hands-On <strong>"Técnica Classe IV com Muralha Palatina"</strong> com o <strong>Prof. Dr. Emilio Akaki</strong> foram totalmente preenchidas.
+                                </p>
+                                <div style="background: rgba(15, 94, 181, 0.16); border: 1px solid rgba(156, 197, 248, 0.3); border-radius: 12px; padding: 16px 20px; max-width: 520px; margin: 0 auto 1.8rem auto; text-align: left; font-size: 0.92rem; color: #ffffff; line-height: 1.5;">
+                                    <i class="fa-solid fa-circle-check" style="color: #7ef7d1; margin-right: 6px;"></i>
+                                    <strong>Já garantiu a sua vaga?</strong> Se você já se inscreveu e enviou o comprovante, utilize a aba de consulta para verificar a confirmação da sua inscrição a qualquer momento.
                                 </div>
-                                <div class="input-group">
-                                    <input type="email" name="email" id="memberEmail" placeholder="E-mail Acadêmico" required>
-                                </div>
-                                <div class="input-group">
-                                    <input type="tel" name="whatsapp" id="memberPhone" placeholder="Telefone / WhatsApp com DDD" required>
-                                </div>
-                                <div class="input-group">
-                                    <select name="periodo" id="memberPeriod" required>
-                                        <option value="" disabled selected>Período atual</option>
-                                        <option value="1º Período">1º Período</option>
-                                        <option value="2º Período">2º Período</option>
-                                        <option value="3º Período">3º Período</option>
-                                        <option value="4º Período">4º Período</option>
-                                        <option value="5º Período">5º Período</option>
-                                        <option value="6º Período">6º Período</option>
-                                        <option value="7º Período">7º Período</option>
-                                        <option value="8º Período">8º Período</option>
-                                        <option value="9º Período">9º Período</option>
-                                        <option value="10º Período">10º Período</option>
-                                        <option value="Outro / Pós-graduação">Outro / Pós-graduação</option>
-                                    </select>
-                                </div>
-
-                                <!-- UPLOAD OBRIGATÓRIO DO COMPROVANTE PIX -->
-                                <div class="receipt-upload-wrapper">
-                                    <label class="receipt-upload-label" for="memberReceipt" id="receiptDropzone">
-                                        <input type="file" name="attachment" id="memberReceipt" accept="image/png,image/jpeg,image/jpg,image/webp,application/pdf" required>
-                                        <div class="receipt-upload-content" id="receiptUploadDefault">
-                                            <div class="receipt-icon-circle">
-                                                <i class="fa-solid fa-file-arrow-up"></i>
-                                            </div>
-                                            <div class="receipt-upload-texts">
-                                                <strong>Anexar Comprovante Pix (Obrigatório)</strong>
-                                                <span>Toque para enviar imagem (PNG, JPG) ou PDF (máx. 5MB)</span>
-                                            </div>
-                                        </div>
-                                        <div class="receipt-upload-selected" id="receiptUploadSelected" style="display: none;">
-                                            <img id="receiptPreviewImg" alt="Prévia do comprovante" style="display: none;">
-                                            <div class="receipt-file-icon" id="receiptPdfIcon" style="display: none;">
-                                                <i class="fa-solid fa-file-pdf"></i>
-                                            </div>
-                                            <div class="receipt-selected-info">
-                                                <strong id="receiptFileName">comprovante.jpg</strong>
-                                                <span id="receiptFileSize">Comprovante pronto para envio</span>
-                                            </div>
-                                            <span class="receipt-change-badge"><i class="fa-solid fa-check"></i> Anexado</span>
-                                        </div>
-                                    </label>
-                                    <p class="receipt-error-msg" id="receiptErrorMsg" style="display: none;"></p>
-                                </div>
-
-                               <div class="vinculo-group" style="margin-bottom: 1.5rem;">
-    <p style="margin-bottom: 10px; font-size: 0.95rem; opacity: 0.9;">Selecione o seu vínculo (confirma pagamento de R$ 15,00):</p>
-    
-    <label class="member-checkbox-group" for="vinculoLaro" style="margin-bottom: 10px; display: block;">
-        <input type="radio" name="vinculo" id="vinculoLaro" value="Membro LARO" required>
-        <span class="checkbox-custom" style="border-radius: 50%;"></span>
-        <span class="checkbox-label">Sou <strong>membro da L.A.R.O.</strong> e anexei o comprovante.</span>
-    </label>
-
-    <label class="member-checkbox-group" for="vinculoUniBH" style="display: block;">
-        <input type="radio" name="vinculo" id="vinculoUniBH" value="Aluno UniBH" required>
-        <span class="checkbox-custom" style="border-radius: 50%;"></span>
-        <span class="checkbox-label">Sou <strong>aluno(a) da UniBH</strong> e anexei o comprovante.</span>
-    </label>
-</div>
-
-
-                                <button type="submit" class="submit-btn arrow-btn" id="lectureSubmitBtn">Confirmar Inscrição e Enviar Comprovante</button>
-                                <button type="button" class="secondary-consult-btn" onclick="switchPalestraTab('consultar')">
-                                    <i class="fa-solid fa-magnifying-glass"></i> Já se inscreveu? Consultar Inscrição
+                                <button type="button" class="submit-btn arrow-btn" style="max-width: 340px; margin: 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 8px;" onclick="switchPalestraTab('consultar')">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Consultar Minha Inscrição
                                 </button>
-                            </form>
+                            </div>
                         </div>
 
                         <!-- PAINEL 2: CONSULTAR INSCRIÇÃO (APENAS POR E-MAIL) -->
